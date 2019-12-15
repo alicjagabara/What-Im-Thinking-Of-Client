@@ -2,8 +2,6 @@ package sample;
 
 import lombok.Getter;
 import sample.types.SendMessageTypes;
-
-import javax.lang.model.element.Name;
 import java.io.IOException;
 
 public class GameManager {
@@ -13,9 +11,11 @@ public class GameManager {
 
     private GameManager(){
         this.messagesRetriever = new MessagesRetriever(new ConnectionHandler());
+        new Thread(this.messagesRetriever).start();
+
     }
 
-    synchronized public static GameManager getInstance(){
+    public static synchronized GameManager getInstance(){
         if (instance == null) instance = new GameManager();
         return instance;
     }

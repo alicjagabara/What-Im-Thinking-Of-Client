@@ -6,19 +6,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="588.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.views.AName">
+<AnchorPane prefHeight="400.0" prefWidth="588.0" style="-fx-background-color: black;"
+            xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="sample.controllers.AName">
    <children>
       <Text fill="#f8f4f4" layoutX="95.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are Inventor" wrappingWidth="409.6181640625">
          <font>
             <Font name="Calibri Bold" size="56.0" />
          </font>
       </Text>
-      <TextField fx:id="name" layoutX="160.0" layoutY="182.0" prefHeight="64.0" prefWidth="284.0" promptText="name" style="-fx-background-color: #353535;">
-         <font>
-            <Font name="Calibri" size="44.0" />
-         </font>
-      </TextField>
-      <Button fx:id="exit" layoutX="549.0" layoutY="-4.0" mnemonicParsing="false" onAction="#exit" prefHeight="64.0" prefWidth="55.0" style="-fx-background-color: #101010;" text="X" textFill="WHITE">
+       <TextField fx:id="name" layoutX="158.0" layoutY="189.0" prefHeight="85.0" prefWidth="284.0"
+                  promptText="name" style="-fx-background-color: #353535; -fx-text-fill: white;">
+           <font>
+               <Font name="Calibri" size="44.0"/>
+           </font>
+       </TextField>
+      <Button fx:id="exit" layoutX="549.0" layoutY="-4.0" mnemonicParsing="false" onAction="#exit" prefHeight="64.0"
+              prefWidth="55.0" style="-fx-background-color: #101010;" text="X" textFill="WHITE">
          <font>
             <Font size="28.0" />
          </font>

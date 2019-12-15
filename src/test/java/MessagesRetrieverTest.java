@@ -59,4 +59,15 @@ public class MessagesRetrieverTest {
         assertEquals("", sut.getIncompleteMessage());
     }
 
+    @Test
+    public void shouldSeparateIncomplete() throws IOException {
+        when(connectionHandler.receiveMessage()).thenReturn("/aa//bb//cc/");
+        sut.setIncompleteMessage("dd/");
+        sut.readMessage();
+        List<String> expected = Arrays.asList("dd", "aa", "bb");
+
+        assertEquals(expected, sut.getMessages());
+        assertEquals("cc/", sut.getIncompleteMessage());
+    }
+
 }

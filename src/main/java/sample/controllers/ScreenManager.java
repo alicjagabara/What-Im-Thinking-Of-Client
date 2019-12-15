@@ -20,7 +20,7 @@ public class ScreenManager {
     private void setScene(String nextScene, Stage current) {
         Parent newScene = null;
         try {
-            newScene = FXMLLoader.load(getClass().getResource("sample/views/" + nextScene +".fxml"));
+            newScene = FXMLLoader.load(getClass().getResource(String.format("/%s.fxml", nextScene)));
         } catch(IOException e) {
             e.printStackTrace();
         }

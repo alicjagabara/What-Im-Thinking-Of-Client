@@ -15,6 +15,7 @@ import java.util.List;
 public class MessagesRetriever implements Runnable {
 
     public static final String END_OF_SENTENCE = "//";
+    private boolean running = true;
     private ConnectionHandler connectionHandler;
     private List<String> messages = new ArrayList<>();
     private String incompleteMessage = "";
@@ -24,40 +25,42 @@ public class MessagesRetriever implements Runnable {
         this.connectionHandler = connectionHandler;
     }
 
-    public void readMessage() {
-        try {
-            boolean incomplete = false;
-            String message = connectionHandler.receiveMessage();
-            if (message.length() >= 2) {
-                if (!message.substring(message.length() - 2).equals(END_OF_SENTENCE)) {
-                    incomplete = true;
-                }
-            } else {
+    public void readMessage() throws IOException {
+
+        boolean incomplete = false;
+        String message = connectionHandler.receiveMessage();
+        String completeMessage = incompleteMessage + message;
+        incompleteMessage = "";
+        if (completeMessage.length() >= 2) {
+            if (!completeMessage.substring(completeMessage.length() - 2).equals(END_OF_SENTENCE)) {
                 incomplete = true;
             }
-            List<String> msgList = new ArrayList<>(Arrays.asList(message.split(END_OF_SENTENCE)));
-            if (!incompleteMessage.isEmpty()) {
-                this.messages.add(incompleteMessage + msgList.remove(0));
-                incompleteMessage = "";
-            }
-            if (incomplete) {
-                incompleteMessage = msgList.remove(msgList.size() - 1);
-            }
-            messages.addAll(msgList);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            incomplete = true;
         }
+        List<String> msgList = new ArrayList<>(Arrays.asList(completeMessage.split(END_OF_SENTENCE)));
+        if (incomplete) {
+            incompleteMessage = msgList.remove(msgList.size() - 1);
+        }
+        System.out.println("Separated messages : " + msgList);
+        System.out.println("Incomplete message : " + incompleteMessage);
+        messages.addAll(msgList);
     }
 
+    @Override
     public void run() {
-        while (true) {
-            readMessage();
-            findTypes();
+        while (running) {
+            try {
+                readMessage();
+                findTypes();
+            } catch (IOException e) {
+                e.printStackTrace();
+                closeConnection();
+            }
         }
     }
 
-    void findTypes() {
+    private void findTypes() {
         for (String message : this.messages) {
             ReceivedMessageTypes msgType = ReceivedMessageTypes.UNKNOWN;
             for (ReceivedMessageTypes type : ReceivedMessageTypes.values()) {
@@ -70,7 +73,9 @@ public class MessagesRetriever implements Runnable {
     }
 
     private void retrieveType(ReceivedMessageTypes msgType, String message) {
+        System.out.println("retrieving");
         if (user == null) {
+            System.out.println(msgType);
             switch (msgType) {
                 case USER_A:
                     user = new UserA();
@@ -79,8 +84,7 @@ public class MessagesRetriever implements Runnable {
                     user = new UserB();
                     break;
             }
-        }
-        else {
+        } else {
             switch (msgType) {
                 case WIN:
 
@@ -113,7 +117,7 @@ public class MessagesRetriever implements Runnable {
     }
 
     void sendMessage(SendMessageTypes type, String message) throws IOException {
-        connectionHandler.sendMessage(type.getValue() + message);
+        connectionHandler.sendMessage(type.getValue() + message + "//\n");
     }
 
     void closeConnection() {
@@ -121,6 +125,8 @@ public class MessagesRetriever implements Runnable {
             connectionHandler.sendMessage(SendMessageTypes.CLOSE.getValue());
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            this.running = false;
         }
     }
 }
