@@ -2,6 +2,7 @@ package sample;
 
 import lombok.Getter;
 import lombok.Setter;
+import sample.controllers.AlreadyQuestioned;
 import sample.types.ReceivedMessageTypes;
 import sample.types.SendMessageTypes;
 
@@ -20,6 +21,7 @@ public class MessagesRetriever implements Runnable {
     private List<String> messages = new ArrayList<>();
     private String incompleteMessage = "";
     private User user;
+
 
     public MessagesRetriever(ConnectionHandler connectionHandler) {
         this.connectionHandler = connectionHandler;
@@ -96,10 +98,13 @@ public class MessagesRetriever implements Runnable {
 
                     break;
                 case QA:
-
+                    saveQuestionAnswer(message);
+                    break;
+                case QA_END:
+                    GameManager.getInstance().showQuestionsAnswers();
                     break;
                 case QUESTION:
-
+                    GameManager.getInstance().answerQuestion(message);
                     break;
                 case ASK_QUESTION:
 
@@ -116,15 +121,21 @@ public class MessagesRetriever implements Runnable {
         }
     }
 
+    private void saveQuestionAnswer(String message) {
+        String[] msg = message.split("->");
+        GameManager.getInstance().addQuestion(msg[0], msg[1]);
+    }
+
     void sendMessage(SendMessageTypes type, String message) throws IOException {
         connectionHandler.sendMessage(type.getValue() + message + "//\n");
     }
 
     void closeConnection() {
         try {
-            connectionHandler.sendMessage(SendMessageTypes.CLOSE.getValue());
+            sendMessage(SendMessageTypes.CLOSE, "");
+            connectionHandler.closeConnection();
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } finally {
             this.running = false;
         }

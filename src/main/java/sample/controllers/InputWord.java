@@ -8,21 +8,23 @@ import sample.ScreenManager;
 
 import java.io.IOException;
 
-public class BName {
-
-    @FXML
-    private TextField name;
+public class InputWord {
 
     private ScreenManager screenManager = new ScreenManager();
+
+    @FXML
+    public TextField word;
 
     public void exit(ActionEvent event) {
         GameManager.getInstance().quitGame();
         screenManager.setScreen("welcome", event);
     }
 
-    public void sendName(ActionEvent event) {
+    public void sendWord(ActionEvent event) {
+
         try {
-            GameManager.getInstance().saveName(name.getText());
+            GameManager.getInstance().saveWord(word.getText());
+            screenManager.setScreen("mainGamerA", event);
         } catch (IOException e) {
             screenManager.setScreen("error", event);
         }

@@ -13,6 +13,7 @@ public enum ReceivedMessageTypes {
     ASK_QUESTION("AQ||"),
     GAME_BEGAN("GB||"),
     WRONG_GUESS("WG||"),
+    QA_END("QAE||"),
     UNKNOWN("UNKNOWN");
 
     @Getter

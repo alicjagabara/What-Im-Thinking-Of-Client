@@ -7,7 +7,7 @@ public enum SendMessageTypes {
     NAME("N||"),
     NEW_WORD("NW||"),
     GUESS("G||"),
-    ANSWER("A||"),
+    ANSWER("QA||"),
     QUESTION("Q||");
 
     @Getter

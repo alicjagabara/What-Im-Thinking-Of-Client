@@ -1,4 +1,4 @@
-package sample.controllers;
+package sample;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -13,7 +13,7 @@ import java.io.IOException;
 public class ScreenManager {
 
     public void setScreen(String screen, ActionEvent actionEvent) {
-        Stage current = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Stage current = getCurrentScene(actionEvent);
         setScene(screen,current);
     }
 
@@ -31,5 +31,9 @@ public class ScreenManager {
                 current.setScene(new Scene(finalNewScene));
             });
 
+    }
+
+    public Stage getCurrentScene(ActionEvent actionEvent){
+        return (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     }
 }

@@ -1,7 +1,9 @@
 package sample.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 import sample.GameManager;
+import sample.ScreenManager;
 import sample.UserA;
 
 
@@ -21,6 +23,7 @@ public class Welcome {
     }
 
     public void exit(ActionEvent event) {
-
+        Stage stage = screenManager.getCurrentScene(event);
+        stage.close();
     }
 }
