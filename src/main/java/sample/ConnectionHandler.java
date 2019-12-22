@@ -14,7 +14,7 @@ import static java.lang.System.out;
 public class ConnectionHandler {
 
     private static final String SERVER_ADDRESS = "127.0.0.1";
-    private static final int SERVER_PORT = 8082;
+    private static final int SERVER_PORT = 8081;
     private static final int TIMEOUT = 5000;
 
     private Socket socket;
@@ -36,7 +36,7 @@ public class ConnectionHandler {
     }
 
     public void sendMessage(String message) throws IOException {
-        outputStreamWriter.write(message + "\n");
+        outputStreamWriter.write(message);
         outputStreamWriter.flush();
         out.println("send line : " + message);
     }
@@ -44,7 +44,7 @@ public class ConnectionHandler {
     public String receiveMessage() throws IOException {
         BufferedReader reader = new BufferedReader(inputStreamReader);
         String line = reader.readLine();
-//        if(line == null)  throw new IOException();
+        if(line == null)  throw new IOException();
         out.println(String.format("Received %d bytes: %s", line.length(), line));
         return String.valueOf(line);
     }

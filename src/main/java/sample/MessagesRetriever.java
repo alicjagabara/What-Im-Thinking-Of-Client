@@ -2,7 +2,6 @@ package sample;
 
 import lombok.Getter;
 import lombok.Setter;
-import sample.controllers.AlreadyQuestioned;
 import sample.types.ReceivedMessageTypes;
 import sample.types.SendMessageTypes;
 
@@ -100,14 +99,11 @@ public class MessagesRetriever implements Runnable {
                 case QA:
                     saveQuestionAnswer(message);
                     break;
-                case QA_END:
-                    GameManager.getInstance().showQuestionsAnswers();
-                    break;
                 case QUESTION:
                     GameManager.getInstance().answerQuestion(message);
                     break;
                 case ASK_QUESTION:
-
+                    GameManager.getInstance().askQuestion();
                     break;
                 case GAME_BEGAN:
 
@@ -135,7 +131,7 @@ public class MessagesRetriever implements Runnable {
             sendMessage(SendMessageTypes.CLOSE, "");
             connectionHandler.closeConnection();
         } catch (IOException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         } finally {
             this.running = false;
         }

@@ -1,12 +1,10 @@
 package sample;
 
-import com.sun.tools.javadoc.Main;
 import lombok.Getter;
-import sample.controllers.AlreadyQuestioned;
 import sample.controllers.MainGamerA;
+import sample.controllers.MainGamerB;
 import sample.types.SendMessageTypes;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,22 +15,22 @@ public class GameManager {
     @Getter
     private MessagesRetriever messagesRetriever;
 
-    private AlreadyQuestioned alreadyQuestioned = new AlreadyQuestioned();
-
     private MainGamerA mainGamerA = new MainGamerA();
 
     @Getter
     private Map<String, String> questionAnswerMap = new HashMap<>();
 
+    private MainGamerB mainGamerB = new MainGamerB();
+
 
     private GameManager(){
         this.messagesRetriever = new MessagesRetriever(new ConnectionHandler());
         new Thread(this.messagesRetriever).start();
-
     }
 
     public void addQuestion(String question, String answer){
         questionAnswerMap.put(question, answer);
+        mainGamerB.initShowingQuestionPane(question, answer);
     }
 
     public static synchronized GameManager getInstance(){
@@ -55,7 +53,7 @@ public class GameManager {
     }
 
     public void showQuestionsAnswers() {
-        alreadyQuestioned.init(questionAnswerMap);
+        mainGamerB.initPreviousQuestionsPane(questionAnswerMap);
     }
 
     public void sendAnswer(String answer) throws IOException {
@@ -64,5 +62,17 @@ public class GameManager {
 
     public void answerQuestion(String question) {
         mainGamerA.askForAnswer(question);
+    }
+
+    public void askQuestion() {
+        mainGamerB.initAskingQuestionPane();
+    }
+
+    public void sendQuestion(String question) throws IOException {
+        messagesRetriever.sendMessage(SendMessageTypes.QUESTION, question);
+    }
+
+    public void sendGuess(String guess) throws IOException {
+        messagesRetriever.sendMessage(SendMessageTypes.GUESS, guess);
     }
 }
