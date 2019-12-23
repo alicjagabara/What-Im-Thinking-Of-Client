@@ -2,11 +2,7 @@ package sample.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Accordion;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -14,29 +10,16 @@ import sample.GameManager;
 import sample.ScreenManager;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Map;
-import java.util.ResourceBundle;
 
-public class MainGamerB implements Initializable {
+public class MainGamerB {
 
-    @FXML
-    public Text question;
 
     @FXML
     public Button exitQuestion;
 
     @FXML
     public Button okQuestion;
-
-    @FXML
-    public Text answer;
-
-    @FXML
-    public Text name;
-
-    @FXML
-    public Text life;
 
     @FXML
     public Button guess;
@@ -78,11 +61,24 @@ public class MainGamerB implements Initializable {
     public Button exitFromAskingQuestion;
 
     @FXML
-    public Text askingQuestionPaneHeader;
+    public Label askingQuestionPaneHeader;
+
+    @FXML
+    public Label life;
+
+    @FXML
+    public Label name;
+
+    @FXML
+    public Label question;
+
+    @FXML
+    public Label answer;
+
 
     private ScreenManager screenManager = new ScreenManager();
 
-    public void initMainPane(String life, String name){
+    public void initMainPane(String life, String name) {
         this.life.setText("life left: " + life);
         this.name.setText(name);
         setAllInvisible();
@@ -122,8 +118,7 @@ public class MainGamerB implements Initializable {
     /////////////////////////////////////////////////////////////////////////
 
 
-
-    public void initShowingQuestionPane(String question, String answer){
+    public void initShowingQuestionPane(String question, String answer) {
         this.question.setText(question);
         this.answer.setText(answer);
         setAllInvisible();
@@ -138,18 +133,17 @@ public class MainGamerB implements Initializable {
     //////////////////////////////////////////////////////////////////////////////
 
 
-
-
     public void initAskingQuestionPane() {
-        askingQuestionPaneHeader.setText("You can ask question. You can also wait for your turn to collect more " +
-                "information about word");
+        askingQuestionPaneHeader.setText("You can ask questionLabel. You can also wait for your turn to collect more "
+                + "information about word");
         setAllInvisible();
         this.exitFromAskingQuestion.setVisible(true);
         this.askingPane.setVisible(true);
     }
 
     public void initAskingQuestionPaneWhenThereIsUserRound() {
-        askingQuestionPaneHeader.setText("It's your turn, you must ask question");
+        System.out.println(this.askingQuestionPaneHeader);
+        this.askingQuestionPaneHeader.setText("It's your turn, you must ask question now");
         setAllInvisible();
         this.exitFromAskingQuestion.setVisible(false);
         this.askingPane.setVisible(true);
@@ -167,11 +161,10 @@ public class MainGamerB implements Initializable {
 
 
     ////////////////////////////////////////////////////////////////////////////
-    public void initGuessingWordPane(){
+    public void initGuessingWordPane() {
         setAllInvisible();
         this.wordGuessPane.setVisible(true);
     }
-
 
 
     public void commitYourGuess(ActionEvent actionEvent) {
@@ -191,8 +184,7 @@ public class MainGamerB implements Initializable {
     }
 
 
-
-    private void setAllInvisible(){
+    private void setAllInvisible() {
         this.questionPane.setVisible(false);
         this.mainPane.setVisible(false);
         this.previousPane.setVisible(false);
@@ -200,10 +192,16 @@ public class MainGamerB implements Initializable {
         this.wordGuessPane.setVisible(false);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-        initMainPane(GameManager.getInstance().getMessagesRetriever().getUser().getLife().toString()
-                ,GameManager.getInstance().getMessagesRetriever().getUser().getName());
+    public void initialize() {
+        GameManager.getInstance().setMainGamerB(this);
+        initGuessingWordPane();
+        initPreviousQuestionsPane(GameManager.getInstance().getQuestionAnswerMap());
+        initAskingQuestionPane();
+        initShowingQuestionPane("", "");
+        initMainPane(GameManager.getInstance()
+                .getMessagesRetriever()
+                .getUser()
+                .getLife()
+                .toString(), GameManager.getInstance().getMessagesRetriever().getUser().getName());
     }
 }

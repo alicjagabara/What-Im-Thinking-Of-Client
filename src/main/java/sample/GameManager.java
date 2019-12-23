@@ -1,6 +1,8 @@
 package sample;
 
+import javafx.application.Platform;
 import lombok.Getter;
+import lombok.Setter;
 import sample.controllers.MainGamerA;
 import sample.controllers.MainGamerB;
 import sample.types.SendMessageTypes;
@@ -10,17 +12,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameManager {
+
     private static GameManager instance;
 
     @Getter
     private MessagesRetriever messagesRetriever;
 
-    private MainGamerA mainGamerA = new MainGamerA();
+    @Setter
+    private MainGamerA mainGamerA ;
 
     @Getter
     private Map<String, String> questionAnswerMap = new HashMap<>();
 
-    private MainGamerB mainGamerB = new MainGamerB();
+    @Setter
+    private MainGamerB mainGamerB;
 
 
     private GameManager(){
@@ -30,7 +35,7 @@ public class GameManager {
 
     public void addQuestion(String question, String answer){
         questionAnswerMap.put(question, answer);
-        mainGamerB.initShowingQuestionPane(question, answer);
+        Platform.runLater(() -> mainGamerB.initShowingQuestionPane(question, answer));
     }
 
     public static synchronized GameManager getInstance(){
@@ -61,11 +66,14 @@ public class GameManager {
     }
 
     public void answerQuestion(String question) {
-        mainGamerA.askForAnswer(question);
+        Platform.runLater(() -> mainGamerA.askForAnswer(question));
     }
 
-    public void askQuestion() {
-        mainGamerB.initAskingQuestionPane();
+    public void askQuestion() throws IOException {
+        /*if (mainGamerB == null){
+            messagesRetriever.sendMessage(SendMessageTypes.QUESTION, "");
+        }*/
+        Platform.runLater(() -> mainGamerB.initAskingQuestionPaneWhenThereIsUserRound());
     }
 
     public void sendQuestion(String question) throws IOException {

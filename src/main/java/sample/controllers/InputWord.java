@@ -23,8 +23,8 @@ public class InputWord {
     public void sendWord(ActionEvent event) {
 
         try {
-            GameManager.getInstance().saveWord(word.getText());
             screenManager.setScreen("mainGamerA", event);
+            GameManager.getInstance().saveWord(word.getText());
         } catch (IOException e) {
             screenManager.setScreen("error", event);
         }

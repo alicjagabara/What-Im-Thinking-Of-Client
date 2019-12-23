@@ -61,7 +61,7 @@ public class MessagesRetriever implements Runnable {
         }
     }
 
-    private void findTypes() {
+    private void findTypes() throws IOException {
         for (String message : this.messages) {
             ReceivedMessageTypes msgType = ReceivedMessageTypes.UNKNOWN;
             for (ReceivedMessageTypes type : ReceivedMessageTypes.values()) {
@@ -69,12 +69,11 @@ public class MessagesRetriever implements Runnable {
                     msgType = type;
                 }
             }
-            retrieveType(msgType, message);
+            retrieveType(msgType, message.substring(msgType.getValue().length()));
         }
     }
 
-    private void retrieveType(ReceivedMessageTypes msgType, String message) {
-        System.out.println("retrieving");
+    private void retrieveType(ReceivedMessageTypes msgType, String message) throws IOException {
         if (user == null) {
             System.out.println(msgType);
             switch (msgType) {

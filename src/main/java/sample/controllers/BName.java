@@ -22,8 +22,8 @@ public class BName {
 
     public void sendName(ActionEvent event) {
         try {
-            GameManager.getInstance().saveName(name.getText());
             screenManager.setScreen("mainGamerB", event);
+            GameManager.getInstance().saveName(name.getText());
         } catch (IOException e) {
             screenManager.setScreen("error", event);
         }
