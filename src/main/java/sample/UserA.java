@@ -2,12 +2,7 @@ package sample;
 
 public class UserA extends User {
 
-
-    public void createWord(){
-
-    }
-
-    public void answerQuestion(){
-
+    public UserA(String name) {
+        super(name, 3);
     }
 }

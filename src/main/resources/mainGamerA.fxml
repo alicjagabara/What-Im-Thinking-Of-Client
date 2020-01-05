@@ -8,40 +8,43 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="333.0" prefWidth="569.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.MainGamerA">
-   <children>
-      <Pane fx:id="waitingPane" layoutX="-1.0" prefHeight="341.0" prefWidth="601.0" style="-fx-background-color: #030303;">
-         <children>
-            <Text fill="#e5e5e5" layoutX="104.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wait for Question...">
-               <font>
-                  <Font name="Calibri" size="49.0" />
-               </font>
-            </Text>
-         </children></Pane>
-      <Pane fx:id="questionPane" layoutX="-1.0" prefHeight="341.0" prefWidth="601.0" style="-fx-background-color: #030303;" visible="false">
-         <children>
-            <TextField fx:id="answer" layoutX="159.0" layoutY="155.0" prefHeight="85.0" prefWidth="284.0" promptText="name" style="-fx-background-color: #353535; -fx-text-fill: white;" text="answer">
-               <font>
-                  <Font name="Calibri" size="41.0" />
-               </font>
-            </TextField>
-            <Button fx:id="ok" layoutX="251.0" layoutY="279.0" mnemonicParsing="false" onAction="#sendAnswer"
-                    prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: #353535;" text="OK" textFill="#d0cece">
-               <font>
-                  <Font name="Calibri" size="19.0" />
-               </font>
-            </Button>
-            <Label fx:id="questionLabel" layoutX="52.0" layoutY="27.0" prefHeight="78.0" prefWidth="497.0" style="-fx-text-fill: white;" text="QUESTION">
-               <font>
-                  <Font name="Calibri" size="22.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <Button layoutX="578.0" layoutY="17.0" mnemonicParsing="false" onAction="#exitToMainMenu" prefHeight="64.0" prefWidth="55.0" style="-fx-background-color: #101010;" text="X" textFill="WHITE">
+<AnchorPane prefHeight="333.0" prefWidth="569.0" style="-fx-background-color: black;"
+            xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="sample.controllers.MainGamerA">
+   <Pane fx:id="waitingPane" layoutX="-1.0" prefHeight="341.0" prefWidth="601.0" style="-fx-background-color: #030303;">
+      <Text fill="#e5e5e5" layoutX="104.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0"
+            text="Wait for Question...">
          <font>
-            <Font size="28.0" />
+            <Font name="Calibri" size="49.0"/>
+         </font>
+      </Text>
+   </Pane>
+   <Pane fx:id="questionPane" layoutX="-1.0" prefHeight="341.0" prefWidth="601.0" style="-fx-background-color: #030303;"
+         visible="false">
+      <TextField fx:id="answer" layoutX="159.0" layoutY="155.0" prefHeight="85.0" prefWidth="284.0" promptText="name"
+                 style="-fx-background-color: #353535; -fx-text-fill: white;" text="answer">
+         <font>
+            <Font name="Calibri" size="41.0"/>
+         </font>
+      </TextField>
+      <Button fx:id="ok" layoutX="251.0" layoutY="279.0" mnemonicParsing="false" onAction="#sendAnswer"
+              prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: #353535;" text="OK"
+              textFill="#d0cece">
+         <font>
+            <Font name="Calibri" size="19.0"/>
          </font>
       </Button>
-   </children>
+      <Label fx:id="questionLabel" layoutX="52.0" layoutY="27.0" prefHeight="78.0" prefWidth="497.0"
+             style="-fx-text-fill: white;" text="QUESTION">
+         <font>
+            <Font name="Calibri" size="22.0"/>
+         </font>
+      </Label>
+   </Pane>
+   <Button layoutX="578.0" layoutY="17.0" mnemonicParsing="false" onAction="#exitToMainMenu" prefHeight="64.0"
+           prefWidth="55.0" style="-fx-background-color: #101010;" text="X" textFill="WHITE">
+      <font>
+         <Font size="28.0"/>
+      </font>
+   </Button>
 </AnchorPane>

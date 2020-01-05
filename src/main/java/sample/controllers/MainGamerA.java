@@ -25,7 +25,8 @@ public class MainGamerA {
 
     public void sendAnswer(ActionEvent event) {
         try {
-            GameManager.getInstance().sendAnswer(this.answer.getText());
+            System.out.println("Answer text: " + this.answer.getText());
+            GameManager.getInstance().sendAnswer(this.questionLabel.getText() ,this.answer.getText());
         } catch (IOException e) {
             e.printStackTrace();
         }

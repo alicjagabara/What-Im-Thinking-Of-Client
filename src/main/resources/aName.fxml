@@ -9,28 +9,28 @@
 <AnchorPane prefHeight="400.0" prefWidth="588.0" style="-fx-background-color: black;"
             xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="sample.controllers.AName">
-   <children>
-      <Text fill="#f8f4f4" layoutX="95.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are Inventor" wrappingWidth="409.6181640625">
-         <font>
-            <Font name="Calibri Bold" size="56.0" />
-         </font>
-      </Text>
-       <TextField fx:id="name" layoutX="158.0" layoutY="189.0" prefHeight="85.0" prefWidth="284.0"
-                  promptText="name" style="-fx-background-color: #353535; -fx-text-fill: white;">
-           <font>
-               <Font name="Calibri" size="44.0"/>
-           </font>
-       </TextField>
-      <Button fx:id="exit" layoutX="549.0" layoutY="-4.0" mnemonicParsing="false" onAction="#exit" prefHeight="64.0"
-              prefWidth="55.0" style="-fx-background-color: #101010;" text="X" textFill="WHITE">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Button>
-      <Button fx:id="ok" layoutX="268.0" layoutY="336.0" mnemonicParsing="false" onAction="#sendName" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: #353535;" text="OK" textFill="#d0cece">
-         <font>
-            <Font name="Calibri" size="19.0" />
-         </font>
-      </Button>
-   </children>
+    <Text fill="#f8f4f4" layoutX="95.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are Inventor"
+          wrappingWidth="409.6181640625">
+        <font>
+          <Font name="Calibri Bold" size="56.0"/>
+        </font>
+    </Text>
+    <TextField fx:id="name" layoutX="158.0" layoutY="189.0" prefHeight="85.0" prefWidth="284.0"
+               promptText="name" style="-fx-background-color: #353535; -fx-text-fill: white;">
+        <font>
+            <Font name="Calibri" size="44.0"/>
+        </font>
+    </TextField>
+    <Button fx:id="exit" layoutX="549.0" layoutY="-4.0" mnemonicParsing="false" onAction="#exit" prefHeight="64.0"
+            prefWidth="55.0" style="-fx-background-color: #101010;" text="X" textFill="WHITE">
+        <font>
+          <Font size="28.0"/>
+        </font>
+    </Button>
+    <Button fx:id="ok" layoutX="268.0" layoutY="336.0" mnemonicParsing="false" onAction="#sendName" prefHeight="31.0"
+            prefWidth="101.0" style="-fx-background-color: #353535;" text="OK" textFill="#d0cece">
+        <font>
+          <Font name="Calibri" size="19.0"/>
+        </font>
+    </Button>
 </AnchorPane>

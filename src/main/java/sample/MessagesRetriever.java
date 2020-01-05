@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Getter
 @Setter
@@ -20,6 +22,7 @@ public class MessagesRetriever implements Runnable {
     private List<String> messages = new ArrayList<>();
     private String incompleteMessage = "";
     private User user;
+    private ExecutorService executor = Executors.newSingleThreadExecutor();
 
 
     public MessagesRetriever(ConnectionHandler connectionHandler) {
@@ -27,41 +30,48 @@ public class MessagesRetriever implements Runnable {
     }
 
     public void readMessage() throws IOException {
-
-        boolean incomplete = false;
-        String message = connectionHandler.receiveMessage();
-        String completeMessage = incompleteMessage + message;
-        incompleteMessage = "";
-        if (completeMessage.length() >= 2) {
-            if (!completeMessage.substring(completeMessage.length() - 2).equals(END_OF_SENTENCE)) {
+        while (running) {
+            boolean incomplete = false;
+            String message = connectionHandler.receiveMessage();
+            String completeMessage = incompleteMessage + message;
+            incompleteMessage = "";
+            if (completeMessage.length() >= 2) {
+                if (!completeMessage.substring(completeMessage.length() - 2).equals(END_OF_SENTENCE)) {
+                    incomplete = true;
+                }
+            } else {
                 incomplete = true;
             }
-        } else {
-            incomplete = true;
+            List<String> msgList = new ArrayList<>(Arrays.asList(completeMessage.split(END_OF_SENTENCE)));
+            if (incomplete) {
+                incompleteMessage = msgList.remove(msgList.size() - 1);
+            }
+            messages.addAll(msgList);
         }
-        List<String> msgList = new ArrayList<>(Arrays.asList(completeMessage.split(END_OF_SENTENCE)));
-        if (incomplete) {
-            incompleteMessage = msgList.remove(msgList.size() - 1);
-        }
-        System.out.println("Separated messages : " + msgList);
-        System.out.println("Incomplete message : " + incompleteMessage);
-        messages.addAll(msgList);
     }
 
     @Override
     public void run() {
-        while (running) {
+        executor.submit(() -> {
             try {
                 readMessage();
-                findTypes();
             } catch (IOException e) {
                 e.printStackTrace();
-                closeConnection();
+            }
+        });
+        while (running) {
+            findTypes();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
+
     }
 
-    private void findTypes() throws IOException {
+    private void findTypes() {
         for (String message : this.messages) {
             ReceivedMessageTypes msgType = ReceivedMessageTypes.UNKNOWN;
             for (ReceivedMessageTypes type : ReceivedMessageTypes.values()) {
@@ -71,17 +81,17 @@ public class MessagesRetriever implements Runnable {
             }
             retrieveType(msgType, message.substring(msgType.getValue().length()));
         }
+        messages.clear();
     }
 
-    private void retrieveType(ReceivedMessageTypes msgType, String message) throws IOException {
+    private void retrieveType(ReceivedMessageTypes msgType, String message) {
         if (user == null) {
-            System.out.println(msgType);
             switch (msgType) {
                 case USER_A:
-                    user = new UserA();
+                    user = new UserA("");
                     break;
                 case USER_B:
-                    user = new UserB();
+                    user = new UserB("");
                     break;
             }
         } else {
@@ -96,6 +106,7 @@ public class MessagesRetriever implements Runnable {
 
                     break;
                 case QA:
+                    System.out.println("You received answer : " + message);
                     saveQuestionAnswer(message);
                     break;
                 case QUESTION:
@@ -118,6 +129,7 @@ public class MessagesRetriever implements Runnable {
 
     private void saveQuestionAnswer(String message) {
         String[] msg = message.split("->");
+        System.out.println("Question : " + msg[0] + "Answer : " + msg[1]);
         GameManager.getInstance().addQuestion(msg[0], msg[1]);
     }
 

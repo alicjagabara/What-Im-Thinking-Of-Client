@@ -79,8 +79,9 @@ public class MainGamerB {
     private ScreenManager screenManager = new ScreenManager();
 
     public void initMainPane(String life, String name) {
+        System.out.println("Initializing mainBPane! life: " + life + " name: " + name);
         this.life.setText("life left: " + life);
-        this.name.setText(name);
+        this.name.setText("name: " + name);
         setAllInvisible();
         this.mainPane.setVisible(true);
     }
@@ -110,6 +111,7 @@ public class MainGamerB {
         for (Map.Entry<String, String> row : questionAnswerMap.entrySet()) {
             table.getPanes().add(new TitledPane(row.getKey(), new Text(row.getValue())));
         }
+        questionAnswerMap.clear();
         setAllInvisible();
         this.previousPane.setVisible(true);
     }
@@ -179,8 +181,11 @@ public class MainGamerB {
     ////////////////////////////////////////////////////////////////////////////
 
     public void exitToMainGamerBPanel(ActionEvent actionEvent) {
-        setAllInvisible();
-        mainPane.setVisible(true);
+        initMainPane(GameManager.getInstance()
+                .getMessagesRetriever()
+                .getUser()
+                .getLife()
+                .toString(), GameManager.getInstance().getMessagesRetriever().getUser().getName());
     }
 
 

@@ -19,7 +19,7 @@ public class GameManager {
     private MessagesRetriever messagesRetriever;
 
     @Setter
-    private MainGamerA mainGamerA ;
+    private MainGamerA mainGamerA;
 
     @Getter
     private Map<String, String> questionAnswerMap = new HashMap<>();
@@ -57,22 +57,16 @@ public class GameManager {
         messagesRetriever.sendMessage(SendMessageTypes.NEW_WORD, word);
     }
 
-    public void showQuestionsAnswers() {
-        mainGamerB.initPreviousQuestionsPane(questionAnswerMap);
-    }
-
-    public void sendAnswer(String answer) throws IOException {
-        messagesRetriever.sendMessage(SendMessageTypes.ANSWER, answer);
+    public void sendAnswer(String question, String answer) throws IOException {
+        String msg = question + "->" + answer;
+        messagesRetriever.sendMessage(SendMessageTypes.ANSWER, msg);
     }
 
     public void answerQuestion(String question) {
         Platform.runLater(() -> mainGamerA.askForAnswer(question));
     }
 
-    public void askQuestion() throws IOException {
-        /*if (mainGamerB == null){
-            messagesRetriever.sendMessage(SendMessageTypes.QUESTION, "");
-        }*/
+    public void askQuestion(){
         Platform.runLater(() -> mainGamerB.initAskingQuestionPaneWhenThereIsUserRound());
     }
 

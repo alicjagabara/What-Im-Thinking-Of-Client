@@ -70,4 +70,12 @@ public class MessagesRetrieverTest {
         assertEquals("cc/", sut.getIncompleteMessage());
     }
 
+    @Test
+    public void shouldSeparateQuestionAndAnswer(){
+        String[] expected = {"question","answer"};
+        String msg = "question->answer";
+        assertEquals(expected[0], msg.split("->")[0]);
+        assertEquals(expected[1], msg.split("->")[1]);
+    }
+
 }

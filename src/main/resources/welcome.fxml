@@ -6,25 +6,26 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="333.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.Welcome">
-   <children>
-      <Pane layoutX="-3.0" layoutY="-1.0" prefHeight="341.0" prefWidth="595.0" style="-fx-background-color: #030303;">
-         <children>
-            <Button fx:id="newGame" layoutX="112.0" layoutY="128.0" mnemonicParsing="false" onAction="#newGame" prefHeight="51.0" prefWidth="372.0" style="-fx-background-color: #424242; -fx-opacity: ;" text="New Game" textFill="#c6c6c6">
-               <font>
-                  <Font name="Calibri" size="27.0" />
-               </font>
-            </Button>
-            <Text fill="#e5e5e5" layoutX="113.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome in &quot;What I'm Thinking?&quot;">
-               <font>
-                  <Font name="Calibri" size="27.0" />
-               </font>
-            </Text>
-            <Button fx:id="exit" layoutX="112.0" layoutY="235.0" mnemonicParsing="false" onAction="#exit" prefHeight="51.0" prefWidth="372.0" style="-fx-background-color: #424242; -fx-opacity: ;" text="Exit" textFill="#c6c6c6">
-               <font>
-                  <Font name="Calibri" size="27.0" />
-               </font>
-            </Button>
-         </children></Pane>
-   </children>
+<AnchorPane prefHeight="333.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.Welcome">
+   <Pane layoutX="-3.0" layoutY="-1.0" prefHeight="341.0" prefWidth="595.0" style="-fx-background-color: #030303;">
+      <Button layoutX="112.0" layoutY="128.0" mnemonicParsing="false" onAction="#newGame" prefHeight="51.0"
+              prefWidth="372.0" style="-fx-background-color: #424242;" text="New Game" textFill="#c6c6c6">
+         <font>
+            <Font name="Calibri" size="27.0"/>
+         </font>
+      </Button>
+      <Text fill="#e5e5e5" layoutX="113.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0"
+            text="Welcome in &quot;What I'm Thinking?&quot;">
+         <font>
+            <Font name="Calibri" size="27.0"/>
+         </font>
+      </Text>
+      <Button layoutX="112.0" layoutY="235.0" mnemonicParsing="false" onAction="#exit" prefHeight="51.0"
+              prefWidth="372.0" style="-fx-background-color: #424242;" text="Exit" textFill="#c6c6c6">
+         <font>
+            <Font name="Calibri" size="27.0"/>
+         </font>
+      </Button>
+   </Pane>
 </AnchorPane>
