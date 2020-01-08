@@ -23,6 +23,8 @@ public class MainGamerA {
     public Label questionLabel;
     @FXML
     public AnchorPane loosePane;
+    @FXML
+    public AnchorPane winPane;
 
     private ScreenManager screenManager = new ScreenManager();
 
@@ -59,16 +61,25 @@ public class MainGamerA {
     public void initLoosePane() {
         invisibleAll();
         loosePane.setVisible(true);
+    }
 
+    public void initWinPane() {
+        invisibleAll();
+        winPane.setVisible(true);
     }
 
     private void invisibleAll(){
         waitingPane.setVisible(false);
         questionPane.setVisible(false);
         loosePane.setVisible(false);
+        winPane.setVisible(false);
     }
 
     public void loose(ActionEvent actionEvent) {
         screenManager.setScreen("mainGamerB", actionEvent);
+    }
+
+    public void win(ActionEvent actionEvent) {
+        screenManager.setScreen("inputWord", actionEvent);
     }
 }

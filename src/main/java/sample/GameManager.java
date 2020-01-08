@@ -98,10 +98,16 @@ public class GameManager {
         mainGamerB.initLoosePane();
     }
 
-
-
     public void gamerALoose() {
         this.user = new UserB(this.user.getName());
+        mainGamerA.initLoosePane();
+    }
+
+    public void gamerAWin() {
+        mainGamerA.initWinPane();
+    }
+
+    public void lifeEnded() {
         mainGamerA.initLoosePane();
     }
 }

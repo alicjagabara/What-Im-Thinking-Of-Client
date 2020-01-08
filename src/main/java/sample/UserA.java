@@ -12,15 +12,13 @@ public class UserA extends User {
     public void retrieveType(ReceivedMessageTypes msgType, String message) {
         switch (msgType) {
             case WIN:
+                GameManager.getInstance().gamerAWin();
                 break;
             case LOOSE:
                 GameManager.getInstance().gamerALoose();
                 break;
             case QUESTION:
                 GameManager.getInstance().answerQuestion(message);
-                break;
-            case GAME_BEGAN:
-
                 break;
             case UNKNOWN:
                 break;

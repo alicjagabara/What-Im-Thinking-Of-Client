@@ -93,7 +93,9 @@ public class MainGamerB {
     }
 
     public void goToGuessingWordPane(ActionEvent actionEvent) {
-        initGuessingWordPane();
+        if (GameManager.getInstance().getUser().getLife() > 0) {
+            initGuessingWordPane();
+        }
     }
 
     public void goToShowingPreviousQuestionsPane(ActionEvent actionEvent) {
@@ -101,7 +103,9 @@ public class MainGamerB {
     }
 
     public void goToAskingQuestion(ActionEvent actionEvent) {
-        initAskingQuestionPane();
+        if (GameManager.getInstance().getUser().getLife() > 0) {
+            initAskingQuestionPane();
+        }
     }
 
     public void exitToMainMenu(ActionEvent actionEvent) {
@@ -120,6 +124,10 @@ public class MainGamerB {
         questionAnswerMap.clear();
         setAllInvisible();
         this.previousPane.setVisible(true);
+    }
+
+    public void clearPreviousQuestionsPane() {
+        table.getPanes().clear();
     }
 
 
@@ -186,10 +194,9 @@ public class MainGamerB {
     ////////////////////////////////////////////////////////////////////////////
 
     public void exitToMainGamerBPanel(ActionEvent actionEvent) {
-        initMainPane(GameManager.getInstance()
+        initMainPane(GameManager.getInstance().getUser().getLife().toString(), GameManager.getInstance()
                 .getUser()
-                .getLife()
-                .toString(), GameManager.getInstance().getUser().getName());
+                .getName());
     }
 
 
@@ -209,10 +216,9 @@ public class MainGamerB {
         initPreviousQuestionsPane(GameManager.getInstance().getQuestionAnswerMap());
         initAskingQuestionPane();
         initShowingQuestionPane("", "");
-        initMainPane(GameManager.getInstance()
+        initMainPane(GameManager.getInstance().getUser().getLife().toString(), GameManager.getInstance()
                 .getUser()
-                .getLife()
-                .toString(), GameManager.getInstance().getUser().getName());
+                .getName());
     }
 
     public void initWinPane() {
@@ -226,10 +232,12 @@ public class MainGamerB {
     }
 
     public void win(ActionEvent actionEvent) {
+        clearPreviousQuestionsPane();
         screenManager.setScreen("inputWord", actionEvent);
     }
 
     public void loose(ActionEvent actionEvent) {
+        clearPreviousQuestionsPane();
         exitToMainGamerBPanel(actionEvent);
     }
 }

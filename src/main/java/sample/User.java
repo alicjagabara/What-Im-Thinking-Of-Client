@@ -15,6 +15,11 @@ public abstract class User {
     public abstract void retrieveType(ReceivedMessageTypes msgType, String message);
 
     void removeLife(){
-        life--;
+        if(life > 0) {
+            life--;
+        }
+        else{
+            GameManager.getInstance().lifeEnded();
+        }
     }
 }
