@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import sample.GameManager;
 import sample.ScreenManager;
@@ -20,6 +21,8 @@ public class MainGamerA {
     public TextField answer;
     @FXML
     public Label questionLabel;
+    @FXML
+    public AnchorPane loosePane;
 
     private ScreenManager screenManager = new ScreenManager();
 
@@ -30,26 +33,42 @@ public class MainGamerA {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        questionPane.setVisible(false);
+        invisibleAll();
         waitingPane.setVisible(true);
     }
 
     public void askForAnswer(String question){
+        invisibleAll();
         questionLabel.setText(question);
-        waitingPane.setVisible(false);
         questionPane.setVisible(true);
     }
 
 
     public void initialize() {
         GameManager.getInstance().setMainGamerA(this);
+        invisibleAll();
         questionLabel.setText("");
-        questionPane.setVisible(false);
         waitingPane.setVisible(true);
     }
 
     public void exitToMainMenu(ActionEvent actionEvent) {
         GameManager.getInstance().quitGame();
         screenManager.setScreen("welcome", actionEvent);
+    }
+
+    public void initLoosePane() {
+        invisibleAll();
+        loosePane.setVisible(true);
+
+    }
+
+    private void invisibleAll(){
+        waitingPane.setVisible(false);
+        questionPane.setVisible(false);
+        loosePane.setVisible(false);
+    }
+
+    public void loose(ActionEvent actionEvent) {
+        screenManager.setScreen("mainGamerB", actionEvent);
     }
 }

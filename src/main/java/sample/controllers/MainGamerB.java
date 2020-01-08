@@ -75,6 +75,12 @@ public class MainGamerB {
     @FXML
     public Label answer;
 
+    @FXML
+    public AnchorPane winPane;
+
+    @FXML
+    public AnchorPane loosePane;
+
 
     private ScreenManager screenManager = new ScreenManager();
 
@@ -95,7 +101,7 @@ public class MainGamerB {
     }
 
     public void goToAskingQuestion(ActionEvent actionEvent) {
-        initAskingQuestionPaneWhenThereIsUserRound();
+        initAskingQuestionPane();
     }
 
     public void exitToMainMenu(ActionEvent actionEvent) {
@@ -144,7 +150,6 @@ public class MainGamerB {
     }
 
     public void initAskingQuestionPaneWhenThereIsUserRound() {
-        System.out.println(this.askingQuestionPaneHeader);
         this.askingQuestionPaneHeader.setText("It's your turn, you must ask question now");
         setAllInvisible();
         this.exitFromAskingQuestion.setVisible(false);
@@ -182,10 +187,9 @@ public class MainGamerB {
 
     public void exitToMainGamerBPanel(ActionEvent actionEvent) {
         initMainPane(GameManager.getInstance()
-                .getMessagesRetriever()
                 .getUser()
                 .getLife()
-                .toString(), GameManager.getInstance().getMessagesRetriever().getUser().getName());
+                .toString(), GameManager.getInstance().getUser().getName());
     }
 
 
@@ -195,6 +199,8 @@ public class MainGamerB {
         this.previousPane.setVisible(false);
         this.askingPane.setVisible(false);
         this.wordGuessPane.setVisible(false);
+        this.winPane.setVisible(false);
+        this.loosePane.setVisible(false);
     }
 
     public void initialize() {
@@ -204,9 +210,26 @@ public class MainGamerB {
         initAskingQuestionPane();
         initShowingQuestionPane("", "");
         initMainPane(GameManager.getInstance()
-                .getMessagesRetriever()
                 .getUser()
                 .getLife()
-                .toString(), GameManager.getInstance().getMessagesRetriever().getUser().getName());
+                .toString(), GameManager.getInstance().getUser().getName());
+    }
+
+    public void initWinPane() {
+        setAllInvisible();
+        this.winPane.setVisible(true);
+    }
+
+    public void initLoosePane() {
+        setAllInvisible();
+        this.loosePane.setVisible(true);
+    }
+
+    public void win(ActionEvent actionEvent) {
+        screenManager.setScreen("inputWord", actionEvent);
+    }
+
+    public void loose(ActionEvent actionEvent) {
+        exitToMainGamerBPanel(actionEvent);
     }
 }

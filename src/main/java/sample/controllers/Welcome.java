@@ -13,8 +13,8 @@ public class Welcome {
 
     public void newGame(ActionEvent event) {
         GameManager.getInstance();
-        while(GameManager.getInstance().getMessagesRetriever().getUser() == null);
-        if(GameManager.getInstance().getMessagesRetriever().getUser().getClass() == UserA.class){
+        while(GameManager.getInstance().getUser() == null);
+        if(GameManager.getInstance().getUser().getClass() == UserA.class){
             screenManager.setScreen("aName", event);
         }
         else{

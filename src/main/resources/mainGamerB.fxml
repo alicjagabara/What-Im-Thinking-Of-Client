@@ -126,4 +126,45 @@
          </font>
       </Button>
    </AnchorPane>
+   <AnchorPane fx:id="winPane" layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="614.0" style="-fx-background-color: black;" visible="false">
+      <children>
+         <Text fill="#f8f4f4" layoutX="95.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are winner!" textAlignment="CENTER" wrappingWidth="409.6181640625">
+            <font>
+               <Font name="Calibri Bold" size="56.0" />
+            </font>
+         </Text>
+         <Button layoutX="549.0" layoutY="-4.0" mnemonicParsing="false" onAction="#win" prefHeight="64.0" prefWidth="55.0" style="-fx-background-color: #101010;" text="X" textFill="WHITE">
+            <font>
+               <Font size="28.0" />
+            </font>
+         </Button>
+         <Button contentDisplay="CENTER" layoutX="248.0" layoutY="330.0" mnemonicParsing="false" onAction="#win" prefHeight="36.0" prefWidth="108.0" style="-fx-background-color: #353535;" text="OK" textAlignment="CENTER" textFill="#d0cece">
+            <font>
+               <Font name="Calibri" size="19.0" />
+            </font>
+         </Button>
+         <Text fill="#c9c9c9" layoutX="60.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="It's Your time to be a gamer A! " textAlignment="CENTER" wrappingWidth="483.84814453125" />
+      </children>
+   </AnchorPane>
+   <AnchorPane fx:id="loosePane" layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="614.0"
+               style="-fx-background-color: black;" visible="false">
+      <children>
+         <Text fill="#f8f4f4" layoutX="95.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are looser!" textAlignment="CENTER" wrappingWidth="409.6181640625">
+            <font>
+               <Font name="Calibri Bold" size="56.0" />
+            </font>
+         </Text>
+         <Button layoutX="549.0" layoutY="-4.0" mnemonicParsing="false" onAction="#loose" prefHeight="64.0" prefWidth="55.0" style="-fx-background-color: #101010;" text="X" textFill="WHITE">
+            <font>
+               <Font size="28.0" />
+            </font>
+         </Button>
+         <Button contentDisplay="CENTER" layoutX="248.0" layoutY="330.0" mnemonicParsing="false" onAction="#loose" prefHeight="36.0" prefWidth="108.0" style="-fx-background-color: #353535;" text="OK" textAlignment="CENTER" textFill="#d0cece">
+            <font>
+               <Font name="Calibri" size="19.0" />
+            </font>
+         </Button>
+         <Text fill="#c9c9c9" layoutX="60.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maybe next time you will be faster" textAlignment="CENTER" wrappingWidth="483.84814453125" />
+      </children>
+   </AnchorPane>
 </AnchorPane>

@@ -21,7 +21,6 @@ public class InputWord {
     }
 
     public void sendWord(ActionEvent event) {
-
         try {
             screenManager.setScreen("mainGamerA", event);
             GameManager.getInstance().saveWord(word.getText());

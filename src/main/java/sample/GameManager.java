@@ -16,6 +16,10 @@ public class GameManager {
     private static GameManager instance;
 
     @Getter
+    @Setter
+    private User user;
+
+    @Getter
     private MessagesRetriever messagesRetriever;
 
     @Setter
@@ -33,6 +37,12 @@ public class GameManager {
         new Thread(this.messagesRetriever).start();
     }
 
+    void saveQuestionAnswer(String message) {
+        String[] msg = message.split("->");
+        System.out.println("Question : " + msg[0] + "Answer : " + msg[1]);
+        addQuestion(msg[0], msg[1]);
+    }
+
     public void addQuestion(String question, String answer){
         questionAnswerMap.put(question, answer);
         Platform.runLater(() -> mainGamerB.initShowingQuestionPane(question, answer));
@@ -44,7 +54,7 @@ public class GameManager {
     }
 
     public void saveName(String name) throws IOException {
-        this.messagesRetriever.getUser().setName(name);
+        this.user.setName(name);
         this.messagesRetriever.sendMessage(SendMessageTypes.NAME, name);
     }
 
@@ -76,5 +86,22 @@ public class GameManager {
 
     public void sendGuess(String guess) throws IOException {
         messagesRetriever.sendMessage(SendMessageTypes.GUESS, guess);
+    }
+
+    public void gamerBWin() {
+        this.user = new UserA(this.user.getName());
+        mainGamerB.initWinPane();
+    }
+
+    public void gamerBLoose() {
+        this.user = new UserB(this.user.getName());
+        mainGamerB.initLoosePane();
+    }
+
+
+
+    public void gamerALoose() {
+        this.user = new UserB(this.user.getName());
+        mainGamerA.initLoosePane();
     }
 }

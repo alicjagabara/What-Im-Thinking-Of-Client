@@ -20,6 +20,7 @@ public class ConnectionHandler {
     private Socket socket;
     private OutputStreamWriter outputStreamWriter;
     private InputStreamReader inputStreamReader;
+    private BufferedReader reader;
 
     public ConnectionHandler() {
         try {
@@ -29,6 +30,7 @@ public class ConnectionHandler {
             socket.connect(new InetSocketAddress(SERVER_ADDRESS, SERVER_PORT), TIMEOUT);
             outputStreamWriter = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8);
             inputStreamReader = new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8);
+            reader = new BufferedReader(inputStreamReader);
             out.println("Connection successful!");
         } catch (IOException e) {
             err.println("Could not connect to the server");
@@ -42,7 +44,6 @@ public class ConnectionHandler {
     }
 
     public String receiveMessage() throws IOException {
-        BufferedReader reader = new BufferedReader(inputStreamReader);
         String line = reader.readLine();
         if(line == null)  throw new IOException();
         out.println(String.format("Received %d bytes: %s", line.length(), line));

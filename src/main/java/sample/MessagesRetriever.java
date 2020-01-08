@@ -21,7 +21,6 @@ public class MessagesRetriever implements Runnable {
     private ConnectionHandler connectionHandler;
     private List<String> messages = new ArrayList<>();
     private String incompleteMessage = "";
-    private User user;
     private ExecutorService executor = Executors.newSingleThreadExecutor();
 
 
@@ -79,62 +78,29 @@ public class MessagesRetriever implements Runnable {
                     msgType = type;
                 }
             }
-            retrieveType(msgType, message.substring(msgType.getValue().length()));
+            if (GameManager.getInstance().getUser() == null) {
+                retrieveUserType(msgType);
+            }
+            else {
+                GameManager.getInstance().getUser().retrieveType(msgType, message.substring(msgType.getValue().length()));
+            }
         }
         messages.clear();
     }
 
-    private void retrieveType(ReceivedMessageTypes msgType, String message) {
-        if (user == null) {
-            switch (msgType) {
-                case USER_A:
-                    user = new UserA("");
-                    break;
-                case USER_B:
-                    user = new UserB("");
-                    break;
-            }
-        } else {
-            switch (msgType) {
-                case WIN:
-
-                    break;
-                case LOOSE:
-
-                    break;
-                case NEW_WORD:
-
-                    break;
-                case QA:
-                    System.out.println("You received answer : " + message);
-                    saveQuestionAnswer(message);
-                    break;
-                case QUESTION:
-                    GameManager.getInstance().answerQuestion(message);
-                    break;
-                case ASK_QUESTION:
-                    GameManager.getInstance().askQuestion();
-                    break;
-                case GAME_BEGAN:
-
-                    break;
-                case WRONG_GUESS:
-
-                    break;
-                case UNKNOWN:
-                    break;
-            }
+    private void retrieveUserType(ReceivedMessageTypes msgType){
+        switch (msgType) {
+            case USER_A:
+                GameManager.getInstance().setUser(new UserA(""));
+                break;
+            case USER_B:
+                GameManager.getInstance().setUser(new UserB(""));
+                break;
         }
     }
 
-    private void saveQuestionAnswer(String message) {
-        String[] msg = message.split("->");
-        System.out.println("Question : " + msg[0] + "Answer : " + msg[1]);
-        GameManager.getInstance().addQuestion(msg[0], msg[1]);
-    }
-
     void sendMessage(SendMessageTypes type, String message) throws IOException {
-        connectionHandler.sendMessage(type.getValue() + message + "//\n");
+        connectionHandler.sendMessage(type.getValue() + message + "//");
     }
 
     void closeConnection() {
