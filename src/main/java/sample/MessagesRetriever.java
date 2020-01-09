@@ -55,10 +55,12 @@ public class MessagesRetriever implements Runnable {
             try {
                 readMessage();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Socket error server doesn't response. Ending game");
+                GameManager.getInstance().disconnectGame();
             }
         });
         while (running) {
+            //TODO some mutex
             findTypes();
             try {
                 Thread.sleep(100);
@@ -80,15 +82,16 @@ public class MessagesRetriever implements Runnable {
             }
             if (GameManager.getInstance().getUser() == null) {
                 retrieveUserType(msgType);
-            }
-            else {
-                GameManager.getInstance().getUser().retrieveType(msgType, message.substring(msgType.getValue().length()));
+            } else {
+                GameManager.getInstance()
+                        .getUser()
+                        .retrieveType(msgType, message.substring(msgType.getValue().length()));
             }
         }
         messages.clear();
     }
 
-    private void retrieveUserType(ReceivedMessageTypes msgType){
+    private void retrieveUserType(ReceivedMessageTypes msgType) {
         switch (msgType) {
             case USER_A:
                 GameManager.getInstance().setUser(new UserA(""));
@@ -104,13 +107,11 @@ public class MessagesRetriever implements Runnable {
     }
 
     void closeConnection() {
-        try {
-            sendMessage(SendMessageTypes.CLOSE, "");
-            connectionHandler.closeConnection();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            this.running = false;
-        }
+        connectionHandler.closeConnection();
+        messages.clear();
+        incompleteMessage = "";
+        this.running = false;
+        executor.shutdown();
+
     }
 }

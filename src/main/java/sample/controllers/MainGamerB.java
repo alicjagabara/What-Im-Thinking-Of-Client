@@ -81,6 +81,9 @@ public class MainGamerB {
     @FXML
     public AnchorPane loosePane;
 
+    @FXML
+    public AnchorPane connectionErrorPane;
+
 
     private ScreenManager screenManager = new ScreenManager();
 
@@ -208,6 +211,7 @@ public class MainGamerB {
         this.wordGuessPane.setVisible(false);
         this.winPane.setVisible(false);
         this.loosePane.setVisible(false);
+        this.connectionErrorPane.setVisible(false);
     }
 
     public void initialize() {
@@ -239,5 +243,14 @@ public class MainGamerB {
     public void loose(ActionEvent actionEvent) {
         clearPreviousQuestionsPane();
         exitToMainGamerBPanel(actionEvent);
+    }
+
+    public void connectionError() {
+        setAllInvisible();
+        connectionErrorPane.setVisible(true);
+    }
+
+    public void error(ActionEvent actionEvent) {
+        screenManager.setScreen("error", actionEvent);
     }
 }

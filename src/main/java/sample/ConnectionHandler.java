@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.nio.charset.StandardCharsets;
 
 import static java.lang.System.err;
@@ -15,7 +16,7 @@ public class ConnectionHandler {
 
     private static final String SERVER_ADDRESS = "127.0.0.1";
     private static final int SERVER_PORT = 8081;
-    private static final int TIMEOUT = 5000;
+    private static final int TIMEOUT = 600;
 
     private Socket socket;
     private OutputStreamWriter outputStreamWriter;
@@ -32,8 +33,10 @@ public class ConnectionHandler {
             inputStreamReader = new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8);
             reader = new BufferedReader(inputStreamReader);
             out.println("Connection successful!");
+        } catch (SocketTimeoutException e) {
+            err.println("Could not connect to the server. Timeout !");
         } catch (IOException e) {
-            err.println("Could not connect to the server");
+            err.println("Could not connect to the server.");
         }
     }
 
@@ -50,9 +53,14 @@ public class ConnectionHandler {
         return String.valueOf(line);
     }
 
-    public void closeConnection() throws IOException {
-        socket.close();
-        outputStreamWriter.close();
-        inputStreamReader.close();
+    public void closeConnection(){
+        try {
+            socket.close();
+            outputStreamWriter.close();
+            inputStreamReader.close();
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("Error with closing Connection: " +  e.getMessage());
+        }
     }
 }

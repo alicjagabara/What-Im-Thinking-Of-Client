@@ -63,6 +63,16 @@ public class GameManager {
         instance = null;
     }
 
+    public void disconnectGame() {
+        if(user.getClass() == UserA.class){
+            mainGamerA.connectionError();
+        }
+        else{
+            mainGamerB.connectionError();
+        }
+    }
+
+
     public void saveWord(String word) throws IOException {
         messagesRetriever.sendMessage(SendMessageTypes.NEW_WORD, word);
     }
