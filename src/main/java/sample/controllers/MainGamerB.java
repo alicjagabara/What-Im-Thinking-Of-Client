@@ -131,6 +131,7 @@ public class MainGamerB {
 
     public void clearPreviousQuestionsPane() {
         table.getPanes().clear();
+        System.out.println("Cleared previous questions");
     }
 
 
@@ -217,6 +218,7 @@ public class MainGamerB {
     public void initialize() {
         GameManager.getInstance().setMainGamerB(this);
         initGuessingWordPane();
+        clearPreviousQuestionsPane();
         initPreviousQuestionsPane(GameManager.getInstance().getQuestionAnswerMap());
         initAskingQuestionPane();
         initShowingQuestionPane("", "");

@@ -103,6 +103,9 @@ public class MessagesRetriever implements Runnable {
     }
 
     void sendMessage(SendMessageTypes type, String message) throws IOException {
+        message = message.replace("//", "/ / ");
+        message = message.replace("||", "| | ");
+
         connectionHandler.sendMessage(type.getValue() + message + "//");
     }
 

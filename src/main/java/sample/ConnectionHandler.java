@@ -48,19 +48,19 @@ public class ConnectionHandler {
 
     public String receiveMessage() throws IOException {
         String line = reader.readLine();
-        if(line == null)  throw new IOException();
+        if (line == null) throw new IOException();
         out.println(String.format("Received %d bytes: %s", line.length(), line));
         return String.valueOf(line);
     }
 
-    public void closeConnection(){
+    public void closeConnection() {
         try {
             socket.close();
             outputStreamWriter.close();
             inputStreamReader.close();
             reader.close();
         } catch (IOException e) {
-            System.out.println("Error with closing Connection: " +  e.getMessage());
+            System.out.println("Error with closing Connection: " + e.getMessage());
         }
     }
 }

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import sample.controllers.MainGamerA;
 import sample.controllers.MainGamerB;
+import sample.types.ReceivedMessageTypes;
 import sample.types.SendMessageTypes;
 
 import java.io.IOException;
@@ -58,6 +59,13 @@ public class GameManager {
         this.messagesRetriever.sendMessage(SendMessageTypes.NAME, name);
     }
 
+    public void exitGame() {
+        try {
+            messagesRetriever.sendMessage(SendMessageTypes.CLOSE, "");
+        } catch (IOException ignored){}
+        GameManager.getInstance().quitGame();
+    }
+
     public void quitGame() {
         messagesRetriever.closeConnection();
         instance = null;
@@ -78,6 +86,9 @@ public class GameManager {
     }
 
     public void sendAnswer(String question, String answer) throws IOException {
+        question = question.replace("->", " - > ");
+        answer = answer.replace("->", " - > ");
+
         String msg = question + "->" + answer;
         messagesRetriever.sendMessage(SendMessageTypes.ANSWER, msg);
     }
@@ -99,25 +110,44 @@ public class GameManager {
     }
 
     public void gamerBWin() {
+        this.questionAnswerMap.clear();
         this.user = new UserA(this.user.getName());
         mainGamerB.initWinPane();
     }
 
     public void gamerBLoose() {
+        this.questionAnswerMap.clear();
         this.user = new UserB(this.user.getName());
         mainGamerB.initLoosePane();
     }
 
     public void gamerALoose() {
+        this.questionAnswerMap.clear();
         this.user = new UserB(this.user.getName());
         mainGamerA.initLoosePane();
     }
 
+    public void userALeft(ReceivedMessageTypes userType) {
+        if(userType == ReceivedMessageTypes.USER_A){
+            this.user = new UserA(this.user.getName());
+            mainGamerB.initWinPane();
+        }
+        else{
+            this.user = new UserB(this.user.getName());
+            mainGamerB.initLoosePane();
+        }
+
+    }
+
     public void gamerAWin() {
+        this.questionAnswerMap.clear();
         mainGamerA.initWinPane();
     }
 
     public void lifeEnded() {
         mainGamerA.initLoosePane();
     }
+
+
+
 }

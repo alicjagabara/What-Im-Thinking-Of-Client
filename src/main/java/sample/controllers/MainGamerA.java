@@ -56,7 +56,7 @@ public class MainGamerA {
     }
 
     public void exitToMainMenu(ActionEvent actionEvent) {
-        GameManager.getInstance().quitGame();
+        GameManager.getInstance().exitGame();
         screenManager.setScreen("welcome", actionEvent);
     }
 

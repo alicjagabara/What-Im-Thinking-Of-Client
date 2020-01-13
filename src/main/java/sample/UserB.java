@@ -2,6 +2,9 @@ package sample;
 
 import sample.types.ReceivedMessageTypes;
 
+import static sample.types.ReceivedMessageTypes.USER_A;
+import static sample.types.ReceivedMessageTypes.USER_B;
+
 public class UserB extends User {
 
     public UserB(String name) {
@@ -28,6 +31,12 @@ public class UserB extends User {
                 break;
             case WRONG_GUESS:
                 this.removeLife();
+                break;
+            case USER_A:
+                GameManager.getInstance().userALeft(USER_A);
+                break;
+            case USER_B:
+                GameManager.getInstance().userALeft(USER_B);
                 break;
             case UNKNOWN:
                 break;
