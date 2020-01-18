@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="333.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.Welcome">
-   <Pane layoutX="-3.0" layoutY="-1.0" prefHeight="341.0" prefWidth="595.0" style="-fx-background-color: #030303;">
-      <Button layoutX="112.0" layoutY="128.0" mnemonicParsing="false" onAction="#newGame" prefHeight="51.0"
-              prefWidth="372.0" style="-fx-background-color: #424242;" text="New Game" textFill="#c6c6c6">
+<AnchorPane prefHeight="400.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.Welcome">
+   <Pane layoutX="-3.0" layoutY="-1.0" prefHeight="341.0" prefWidth="595.0" style="-fx-background-color: #212121;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Button layoutX="189.0" layoutY="173.0" mnemonicParsing="false" onAction="#newGame" prefHeight="51.0" prefWidth="372.0" style="-fx-background-color: #424242; -fx-background-radius: 8;" text="New Game" textAlignment="CENTER" textFill="#c6c6c6">
          <font>
-            <Font name="Calibri" size="27.0"/>
+            <Font name="Ubuntu Light" size="30.0" />
          </font>
       </Button>
-      <Text fill="#e5e5e5" layoutX="113.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0"
-            text="Welcome in &quot;What I'm Thinking?&quot;">
+      <Text fill="#e5e5e5" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What I'm Thinking Of" textAlignment="CENTER" wrappingWidth="750.0">
          <font>
-            <Font name="Calibri" size="27.0"/>
+            <Font name="Ubuntu" size="50.0" />
          </font>
       </Text>
-      <Button layoutX="112.0" layoutY="235.0" mnemonicParsing="false" onAction="#exit" prefHeight="51.0"
-              prefWidth="372.0" style="-fx-background-color: #424242;" text="Exit" textFill="#c6c6c6">
+      <Button layoutX="189.0" layoutY="261.0" mnemonicParsing="false" onAction="#exit" prefHeight="51.0" prefWidth="372.0" style="-fx-background-color: #424242; -fx-background-radius: 8;" text="Exit" textAlignment="CENTER" textFill="#c6c6c6">
          <font>
-            <Font name="Calibri" size="27.0"/>
+            <Font name="Ubuntu Light" size="30.0" />
          </font>
       </Button>
+      <Separator layoutX="275.0" layoutY="84.0" prefWidth="200.0" />
    </Pane>
 </AnchorPane>

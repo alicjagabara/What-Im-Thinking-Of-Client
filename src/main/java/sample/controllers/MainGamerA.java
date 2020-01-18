@@ -30,19 +30,31 @@ public class MainGamerA {
 
     private ScreenManager screenManager = new ScreenManager();
 
-    public void sendAnswer(ActionEvent event) {
+    public void sendAnswer(String answer) {
         try {
-            System.out.println("Answer text: " + this.answer.getText());
-            GameManager.getInstance().sendAnswer(this.questionLabel.getText() ,this.answer.getText());
+            System.out.println("Answer: " + answer);
+            GameManager.getInstance().sendAnswer(this.questionLabel.getText() , answer);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        invisibleAll();
+        hideAllPanes();
         waitingPane.setVisible(true);
     }
 
+    public void sendYes() {
+        sendAnswer("Yes");
+    }
+
+    public void sendNo() {
+        sendAnswer("No");
+    }
+
+    public void sendDontKnow() {
+        sendAnswer("I don't know");
+    }
+
     public void askForAnswer(String question){
-        invisibleAll();
+        hideAllPanes();
         questionLabel.setText(question);
         questionPane.setVisible(true);
     }
@@ -50,7 +62,7 @@ public class MainGamerA {
 
     public void initialize() {
         GameManager.getInstance().setMainGamerA(this);
-        invisibleAll();
+        hideAllPanes();
         questionLabel.setText("");
         waitingPane.setVisible(true);
     }
@@ -61,16 +73,16 @@ public class MainGamerA {
     }
 
     public void initLoosePane() {
-        invisibleAll();
+        hideAllPanes();
         loosePane.setVisible(true);
     }
 
     public void initWinPane() {
-        invisibleAll();
+        hideAllPanes();
         winPane.setVisible(true);
     }
 
-    private void invisibleAll(){
+    private void hideAllPanes(){
         waitingPane.setVisible(false);
         questionPane.setVisible(false);
         loosePane.setVisible(false);
@@ -87,7 +99,7 @@ public class MainGamerA {
     }
 
     public void connectionError() {
-        invisibleAll();
+        hideAllPanes();
         connectionErrorPane.setVisible(true);
     }
 

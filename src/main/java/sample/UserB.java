@@ -1,9 +1,9 @@
 package sample;
 
-import sample.types.ReceivedMessageTypes;
+import sample.types.ReceivedMessageType;
 
-import static sample.types.ReceivedMessageTypes.USER_A;
-import static sample.types.ReceivedMessageTypes.USER_B;
+import static sample.types.ReceivedMessageType.INVENTOR;
+import static sample.types.ReceivedMessageType.GUESSER;
 
 public class UserB extends User {
 
@@ -12,7 +12,7 @@ public class UserB extends User {
     }
 
     @Override
-    public void retrieveType(ReceivedMessageTypes msgType, String message) {
+    public void retrieveType(ReceivedMessageType msgType, String message) {
         switch (msgType) {
             case WIN:
                 System.out.println("You WON!");
@@ -32,11 +32,11 @@ public class UserB extends User {
             case WRONG_GUESS:
                 this.removeLife();
                 break;
-            case USER_A:
-                GameManager.getInstance().userALeft(USER_A);
+            case INVENTOR:
+                GameManager.getInstance().userALeft(INVENTOR);
                 break;
-            case USER_B:
-                GameManager.getInstance().userALeft(USER_B);
+            case GUESSER:
+                GameManager.getInstance().userALeft(GUESSER);
                 break;
             case UNKNOWN:
                 break;

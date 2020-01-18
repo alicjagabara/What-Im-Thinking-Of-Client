@@ -1,36 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="588.0" style="-fx-background-color: black;"
-            xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="sample.controllers.AName">
-    <Text fill="#f8f4f4" layoutX="95.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are Inventor"
-          wrappingWidth="409.6181640625">
+<AnchorPane prefHeight="400.0" prefWidth="750.0" style="-fx-background-color: #212121;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.AName">
+    <Text fill="#f8f4f4" layoutX="100.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are a Inventor" textAlignment="CENTER" wrappingWidth="550.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
         <font>
-          <Font name="Calibri Bold" size="56.0"/>
+          <Font name="Ubuntu Light" size="56.0" />
         </font>
     </Text>
-    <TextField fx:id="name" layoutX="158.0" layoutY="189.0" prefHeight="85.0" prefWidth="284.0"
-               promptText="name" style="-fx-background-color: #353535; -fx-text-fill: white;">
+    <TextField fx:id="name" layoutX="153.0" layoutY="156.0" prefHeight="85.0" prefWidth="450.0" promptText="Type your name..." style="-fx-background-color: #424242; -fx-text-fill: white; -fx-background-radius: 8;" AnchorPane.leftAnchor="153.0" AnchorPane.rightAnchor="152.0">
         <font>
-            <Font name="Calibri" size="44.0"/>
+            <Font name="Ubuntu Light" size="44.0" />
         </font>
     </TextField>
-    <Button fx:id="exit" layoutX="549.0" layoutY="-4.0" mnemonicParsing="false" onAction="#exit" prefHeight="64.0"
-            prefWidth="55.0" style="-fx-background-color: #101010;" text="X" textFill="WHITE">
+    <Button fx:id="exit" layoutX="700.0" mnemonicParsing="false" onAction="#exit" prefHeight="52.0" prefWidth="36.0" style="-fx-background-color: #212121;" text="X" textFill="WHITE">
         <font>
-          <Font size="28.0"/>
+          <Font size="28.0" />
         </font>
     </Button>
-    <Button fx:id="ok" layoutX="268.0" layoutY="336.0" mnemonicParsing="false" onAction="#sendName" prefHeight="31.0"
-            prefWidth="101.0" style="-fx-background-color: #353535;" text="OK" textFill="#d0cece">
+    <Button fx:id="ok" layoutX="261.0" layoutY="317.0" mnemonicParsing="false" onAction="#sendName" prefHeight="60.0" prefWidth="229.0" style="-fx-background-color: #424242; -fx-background-radius: 8;" text="OK" textFill="#d0cece">
         <font>
-          <Font name="Calibri" size="19.0"/>
+          <Font name="Ubuntu Light" size="24.0" />
         </font>
     </Button>
+   <Separator layoutX="275.0" layoutY="97.0" prefWidth="200.0" AnchorPane.topAnchor="100.0" />
 </AnchorPane>

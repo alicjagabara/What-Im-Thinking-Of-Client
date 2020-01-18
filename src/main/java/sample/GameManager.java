@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import sample.controllers.MainGamerA;
 import sample.controllers.MainGamerB;
-import sample.types.ReceivedMessageTypes;
+import sample.types.ReceivedMessageType;
 import sample.types.SendMessageTypes;
 
 import java.io.IOException;
@@ -127,8 +127,8 @@ public class GameManager {
         mainGamerA.initLoosePane();
     }
 
-    public void userALeft(ReceivedMessageTypes userType) {
-        if(userType == ReceivedMessageTypes.USER_A){
+    public void userALeft(ReceivedMessageType userType) {
+        if(userType == ReceivedMessageType.INVENTOR){
             this.user = new UserA(this.user.getName());
             mainGamerB.initWinPane();
         }

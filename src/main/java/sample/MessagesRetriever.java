@@ -2,7 +2,7 @@ package sample;
 
 import lombok.Getter;
 import lombok.Setter;
-import sample.types.ReceivedMessageTypes;
+import sample.types.ReceivedMessageType;
 import sample.types.SendMessageTypes;
 
 import java.io.IOException;
@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import static java.lang.System.out;
 
 @Getter
 @Setter
@@ -46,6 +48,7 @@ public class MessagesRetriever implements Runnable {
                 incompleteMessage = msgList.remove(msgList.size() - 1);
             }
             messages.addAll(msgList);
+            findTypes();
         }
     }
 
@@ -55,27 +58,16 @@ public class MessagesRetriever implements Runnable {
             try {
                 readMessage();
             } catch (IOException e) {
-                System.out.println("Socket error server doesn't response. Ending game");
+                System.out.println("Socket error! Server does not respond. Ending game.");
                 GameManager.getInstance().disconnectGame();
             }
         });
-        while (running) {
-            //TODO some mutex
-            findTypes();
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                Thread.currentThread().interrupt();
-            }
-        }
-
     }
 
     private void findTypes() {
         for (String message : this.messages) {
-            ReceivedMessageTypes msgType = ReceivedMessageTypes.UNKNOWN;
-            for (ReceivedMessageTypes type : ReceivedMessageTypes.values()) {
+            ReceivedMessageType msgType = ReceivedMessageType.UNKNOWN;
+            for (ReceivedMessageType type : ReceivedMessageType.values()) {
                 if (message.contains(type.getValue())) {
                     msgType = type;
                 }
@@ -91,12 +83,12 @@ public class MessagesRetriever implements Runnable {
         messages.clear();
     }
 
-    private void retrieveUserType(ReceivedMessageTypes msgType) {
+    private void retrieveUserType(ReceivedMessageType msgType) {
         switch (msgType) {
-            case USER_A:
+            case INVENTOR:
                 GameManager.getInstance().setUser(new UserA(""));
                 break;
-            case USER_B:
+            case GUESSER:
                 GameManager.getInstance().setUser(new UserB(""));
                 break;
         }
@@ -105,7 +97,7 @@ public class MessagesRetriever implements Runnable {
     void sendMessage(SendMessageTypes type, String message) throws IOException {
         message = message.replace("//", "/ / ");
         message = message.replace("||", "| | ");
-
+        out.println(String.format("Sending line of type %s to server: %s", type, message));
         connectionHandler.sendMessage(type.getValue() + message + "//");
     }
 

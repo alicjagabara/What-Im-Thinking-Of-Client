@@ -2,9 +2,9 @@ package sample.types;
 
 import lombok.Getter;
 
-public enum ReceivedMessageTypes {
-    USER_A("A||"),
-    USER_B("B||"),
+public enum ReceivedMessageType {
+    INVENTOR("A||"),
+    GUESSER("B||"),
     WIN("W||"),
     LOOSE("L||"),
     NEW_WORD("NW||"),
@@ -19,7 +19,7 @@ public enum ReceivedMessageTypes {
     @Getter
     private String value;
 
-    ReceivedMessageTypes(String s) {
+    ReceivedMessageType(String s) {
         this.value = s;
     }
 

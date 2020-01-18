@@ -1,49 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.InputWord">
-    <AnchorPane prefHeight="410.0" prefWidth="614.0" style="-fx-background-color: black;"
-                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                AnchorPane.topAnchor="0.0">
-        <Text fill="#f8f4f4" layoutX="95.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input Word"
-              textAlignment="CENTER" wrappingWidth="409.6181640625">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.InputWord">
+    <AnchorPane prefHeight="410.0" prefWidth="614.0" style="-fx-background-color: #212121;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Text fill="#f8f4f4" layoutX="95.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input Word" textAlignment="CENTER" wrappingWidth="409.6181640625">
             <font>
-                <Font name="Calibri Bold" size="56.0"/>
+                <Font name="Ubuntu Light" size="56.0" />
             </font>
         </Text>
-        <TextField fx:id="word" layoutX="158.0" layoutY="234.0" prefHeight="74.0" prefWidth="284.0"
-                   promptText="word" style="-fx-background-color: #353535; -fx-text-fill: white;">
+        <TextField fx:id="word" layoutX="95.0" layoutY="200.0" prefHeight="74.0" prefWidth="383.0" promptText="Type your word..." style="-fx-background-color: #424242; -fx-text-fill: white; -fx-background-radius: 8;">
             <font>
-                <Font name="Calibri Italic" size="30.0"/>
+                <Font name="Calibri Italic" size="30.0" />
             </font>
         </TextField>
-        <Button layoutX="549.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="55.0"
-                style="-fx-background-color: #101010;" text="X" textFill="WHITE">
+        <Button layoutX="549.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="55.0" style="-fx-background-color: #101010;" text="X" textFill="WHITE">
             <font>
-                <Font size="28.0"/>
+                <Font size="28.0" />
             </font>
         </Button>
-        <Button fx:id="exit" layoutX="549.0" layoutY="-4.0" mnemonicParsing="false" onAction="#exit"
-                prefHeight="64.0" prefWidth="55.0" style="-fx-background-color: #101010;" text="X" textFill="WHITE">
+        <Button fx:id="exit" layoutX="549.0" layoutY="-4.0" mnemonicParsing="false" onAction="#exit" prefHeight="64.0" prefWidth="55.0" style="-fx-background-color: #212121;" text="X" textFill="WHITE">
             <font>
-                <Font size="28.0"/>
+                <Font size="28.0" />
             </font>
         </Button>
-        <Button fx:id="ok" contentDisplay="CENTER" layoutX="248.0" layoutY="330.0" mnemonicParsing="false"
-                onAction="#sendWord" prefHeight="36.0" prefWidth="108.0" style="-fx-background-color: #353535;"
-                text="OK" textAlignment="CENTER" textFill="#d0cece">
+        <Button fx:id="ok" contentDisplay="CENTER" layoutX="185.0" layoutY="316.0" mnemonicParsing="false" onAction="#sendWord" prefHeight="52.0" prefWidth="230.0" style="-fx-background-color: #424242; -fx-background-radius: 8;" text="OK" textAlignment="CENTER" textFill="#d0cece">
             <font>
-                <Font name="Calibri" size="19.0"/>
+                <Font name="Ubuntu Light" size="24.0" />
             </font>
         </Button>
-        <Text fill="#c9c9c9" layoutX="60.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0"
-              text="It should be an English word that can be found in the dictionary. Otherwise, you may be banned."
-              textAlignment="CENTER" wrappingWidth="483.84814453125"/>
+        <Text fill="#c9c9c9" layoutX="58.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="It should be an English word that can be found in the dictionary. Otherwise, you may be banned." textAlignment="CENTER" wrappingWidth="483.84814453125">
+         <font>
+            <Font name="Ubuntu Light" size="16.0" />
+         </font></Text>
+      <Separator layoutX="202.0" layoutY="96.0" prefWidth="200.0" />
     </AnchorPane>
 </AnchorPane>

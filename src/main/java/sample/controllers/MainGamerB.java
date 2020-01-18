@@ -88,9 +88,9 @@ public class MainGamerB {
     private ScreenManager screenManager = new ScreenManager();
 
     public void initMainPane(String life, String name) {
-        System.out.println("Initializing mainBPane! life: " + life + " name: " + name);
-        this.life.setText("life left: " + life);
-        this.name.setText("name: " + name);
+        System.out.println("Initializing mainBPane with params: {life: " + life + ", name: " + name + "}");
+        this.life.setText("Life's left: " + life);
+        this.name.setText("Welcome, " + name);
         setAllInvisible();
         this.mainPane.setVisible(true);
     }
@@ -154,15 +154,15 @@ public class MainGamerB {
 
 
     public void initAskingQuestionPane() {
-        askingQuestionPaneHeader.setText("You can ask questionLabel. You can also wait for your turn to collect more "
-                + "information about word");
+        askingQuestionPaneHeader.setText("You can ask question, or you can wait for your turn to collect more "
+                + "information about the word");
         setAllInvisible();
         this.exitFromAskingQuestion.setVisible(true);
         this.askingPane.setVisible(true);
     }
 
     public void initAskingQuestionPaneWhenThereIsUserRound() {
-        this.askingQuestionPaneHeader.setText("It's your turn, you must ask question now");
+        this.askingQuestionPaneHeader.setText("It's your turn to ask questions!");
         setAllInvisible();
         this.exitFromAskingQuestion.setVisible(false);
         this.askingPane.setVisible(true);

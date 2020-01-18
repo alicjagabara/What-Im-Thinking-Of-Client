@@ -1,6 +1,6 @@
 package sample;
 
-import sample.types.ReceivedMessageTypes;
+import sample.types.ReceivedMessageType;
 
 public class UserA extends User {
 
@@ -9,7 +9,7 @@ public class UserA extends User {
     }
 
     @Override
-    public void retrieveType(ReceivedMessageTypes msgType, String message) {
+    public void retrieveType(ReceivedMessageType msgType, String message) {
         switch (msgType) {
             case WIN:
                 GameManager.getInstance().gamerAWin();

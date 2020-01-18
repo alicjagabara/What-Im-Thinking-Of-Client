@@ -1,5 +1,7 @@
 package sample;
 
+import sample.types.SendMessageTypes;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -43,7 +45,6 @@ public class ConnectionHandler {
     public void sendMessage(String message) throws IOException {
         outputStreamWriter.write(message);
         outputStreamWriter.flush();
-        out.println("send line : " + message);
     }
 
     public String receiveMessage() throws IOException {
@@ -60,7 +61,7 @@ public class ConnectionHandler {
             inputStreamReader.close();
             reader.close();
         } catch (IOException e) {
-            System.out.println("Error with closing Connection: " + e.getMessage());
+            System.out.println("Error with closing connection: " + e.getMessage());
         }
     }
 }
