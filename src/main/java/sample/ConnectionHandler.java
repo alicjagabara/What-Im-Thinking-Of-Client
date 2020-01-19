@@ -1,6 +1,6 @@
 package sample;
 
-import sample.types.SendMessageTypes;
+import lombok.Getter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,15 +20,22 @@ public class ConnectionHandler {
     private static final int SERVER_PORT = 8081;
     private static final int TIMEOUT = 600;
 
+    @Getter
     private Socket socket;
     private OutputStreamWriter outputStreamWriter;
     private InputStreamReader inputStreamReader;
     private BufferedReader reader;
 
     public ConnectionHandler() {
+        connect();
+    }
+
+    private void connect() {
         try {
             socket = new Socket();
-            out.println(String.format("Connecting to server at %s:%s with %dms timeout", SERVER_ADDRESS, SERVER_PORT,
+            out.println(String.format("Connecting to server at %s:%s with %dms timeout",
+                    SERVER_ADDRESS,
+                    SERVER_PORT,
                     TIMEOUT));
             socket.connect(new InetSocketAddress(SERVER_ADDRESS, SERVER_PORT), TIMEOUT);
             outputStreamWriter = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8);
@@ -36,11 +43,12 @@ public class ConnectionHandler {
             reader = new BufferedReader(inputStreamReader);
             out.println("Connection successful!");
         } catch (SocketTimeoutException e) {
-            err.println("Could not connect to the server. Timeout !");
+            err.println("Could not connect to the server. Connection timeout!");
         } catch (IOException e) {
             err.println("Could not connect to the server.");
         }
     }
+
 
     public void sendMessage(String message) throws IOException {
         outputStreamWriter.write(message);
@@ -51,15 +59,15 @@ public class ConnectionHandler {
         String line = reader.readLine();
         if (line == null) throw new IOException();
         out.println(String.format("Received %d bytes: %s", line.length(), line));
-        return String.valueOf(line);
+        return line;
     }
 
     public void closeConnection() {
         try {
             socket.close();
-            outputStreamWriter.close();
-            inputStreamReader.close();
-            reader.close();
+            if (outputStreamWriter != null) outputStreamWriter.close();
+            if (inputStreamReader != null) inputStreamReader.close();
+            if (reader != null) reader.close();
         } catch (IOException e) {
             System.out.println("Error with closing connection: " + e.getMessage());
         }

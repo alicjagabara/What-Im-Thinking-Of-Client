@@ -8,6 +8,7 @@ import sample.types.SendMessageTypes;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -69,6 +70,7 @@ public class MessagesRetriever implements Runnable {
             ReceivedMessageType msgType = ReceivedMessageType.UNKNOWN;
             for (ReceivedMessageType type : ReceivedMessageType.values()) {
                 if (message.contains(type.getValue())) {
+                    out.println("Received message of type " + type + ": " + message);
                     msgType = type;
                 }
             }
@@ -86,10 +88,10 @@ public class MessagesRetriever implements Runnable {
     private void retrieveUserType(ReceivedMessageType msgType) {
         switch (msgType) {
             case INVENTOR:
-                GameManager.getInstance().setUser(new UserA(""));
+                GameManager.getInstance().setFirstUser(new UserA(""));
                 break;
             case GUESSER:
-                GameManager.getInstance().setUser(new UserB(""));
+                GameManager.getInstance().setFirstUser(new UserB(""));
                 break;
         }
     }
@@ -106,7 +108,7 @@ public class MessagesRetriever implements Runnable {
         messages.clear();
         incompleteMessage = "";
         this.running = false;
-        executor.shutdown();
+        executor.shutdownNow();
 
     }
 }

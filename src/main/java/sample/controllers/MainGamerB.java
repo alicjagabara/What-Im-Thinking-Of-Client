@@ -89,7 +89,7 @@ public class MainGamerB {
 
     public void initMainPane(String life, String name) {
         System.out.println("Initializing mainBPane with params: {life: " + life + ", name: " + name + "}");
-        this.life.setText("Life's left: " + life);
+        this.life.setText(life);
         this.name.setText("Welcome, " + name);
         setAllInvisible();
         this.mainPane.setVisible(true);

@@ -15,7 +15,7 @@ public class UserA extends User {
                 GameManager.getInstance().gamerAWin();
                 break;
             case LOOSE:
-                GameManager.getInstance().gamerALoose();
+                GameManager.getInstance().gamerALose();
                 break;
             case QUESTION:
                 GameManager.getInstance().answerQuestion(message);

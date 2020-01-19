@@ -17,7 +17,7 @@
             <Font size="28.0" />
          </font>
       </Button>
-      <Button fx:id="okQuestion" contentDisplay="CENTER" layoutX="210.0" layoutY="314.0" mnemonicParsing="false" onAction="#okButtonShowingQuestionPane" prefHeight="60.0" prefWidth="230.0" style="-fx-background-color: #424242; -fx-background-radius: 8;" text="Back" textAlignment="CENTER" textFill="#d0cece">
+      <Button fx:id="okQuestion" contentDisplay="CENTER" layoutX="210.0" layoutY="319.0" mnemonicParsing="false" onAction="#okButtonShowingQuestionPane" prefHeight="60.0" prefWidth="230.0" style="-fx-background-color: #424242; -fx-background-radius: 8;" text="Back" textAlignment="CENTER" textFill="#d0cece">
          <font>
             <Font name="Ubuntu Light" size="24.0" />
          </font>
@@ -34,7 +34,7 @@
       </Label>
       <Separator layoutX="218.0" layoutY="112.0" prefWidth="200.0" />
    </AnchorPane>
-   <Pane fx:id="mainPane" layoutX="5.0" layoutY="11.0" prefHeight="430.0" prefWidth="650.0" style="-fx-background-color: #212121;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+   <Pane fx:id="mainPane" layoutX="5.0" layoutY="11.0" prefHeight="430.0" prefWidth="650.0" style="-fx-background-color: #212121;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <Button fx:id="guess" contentDisplay="CENTER" layoutX="198.0" layoutY="174.0" mnemonicParsing="false" onAction="#goToGuessingWordPane" prefHeight="53.0" prefWidth="255.0" style="-fx-background-color: #424242; -fx-background-radius: 8;" text="Guess Word" textAlignment="CENTER" textFill="#d0cece">
          <font>
             <Font name="Ubuntu Light" size="24.0" />
@@ -55,17 +55,23 @@
             <Font name="Ubuntu Light" size="24.0" />
          </font>
       </Button>
-      <Label fx:id="life" layoutX="14.0" layoutY="92.0" prefHeight="53.0" prefWidth="391.0" style="-fx-text-fill: white;" text="Life's left">
+      <Label fx:id="life" alignment="CENTER" layoutX="221.0" layoutY="97.0" prefHeight="53.0" prefWidth="209.0" style="-fx-text-fill: white;" text="Life" textAlignment="CENTER">
          <font>
-            <Font name="Ubuntu Light" size="24.0" />
+            <Font name="Ubuntu" size="40.0" />
          </font>
       </Label>
       <Label fx:id="name" alignment="CENTER" layoutX="43.0" layoutY="14.0" prefHeight="53.0" prefWidth="564.0" style="-fx-text-fill: white;" text="Welcome" textAlignment="CENTER">
          <font>
-            <Font name="Ubuntu" size="42.0" />
+            <Font name="Ubuntu" size="46.0" />
          </font>
       </Label>
-      <Separator layoutX="225.0" layoutY="78.0" prefWidth="200.0" />
+      <Separator layoutX="226.0" layoutY="71.0" prefWidth="200.0" />
+      <Separator layoutX="226.0" layoutY="144.0" prefWidth="200.0" />
+      <Text fill="WHITE" layoutX="225.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LIFE">
+         <font>
+            <Font name="Ubuntu Bold" size="12.0" />
+         </font>
+      </Text>
    </Pane>
    <AnchorPane fx:id="previousPane" layoutX="10.0" layoutY="10.0" prefHeight="430.0" prefWidth="650.0" style="-fx-background-color: #212121;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <Text fill="#f8f4f4" layoutX="58.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Previous questions" textAlignment="CENTER" wrappingWidth="534.6181640625">
@@ -86,8 +92,8 @@
       <Accordion fx:id="table" layoutX="53.0" layoutY="93.0" prefHeight="223.0" prefWidth="540.0" style="-fx-background-color: #424242; -fx-background-radius: 8;" />
       <Separator layoutX="225.0" layoutY="66.0" prefWidth="200.0" />
    </AnchorPane>
-   <AnchorPane fx:id="askingPane" layoutX="20.0" layoutY="20.0" prefHeight="430.0" prefWidth="650.0" style="-fx-background-color: #212121;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <TextField fx:id="usersQuestion" alignment="TOP_LEFT" layoutX="55.0" layoutY="128.0" prefHeight="176.0" prefWidth="540.0" promptText="Ask a question..." style="-fx-background-color: #424242; -fx-text-fill: white; -fx-background-radius: 8;">
+   <AnchorPane fx:id="askingPane" layoutX="20.0" layoutY="20.0" prefHeight="430.0" prefWidth="650.0" style="-fx-background-color: #212121;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TextField fx:id="usersQuestion" alignment="TOP_LEFT" layoutX="53.0" layoutY="136.0" prefHeight="176.0" prefWidth="540.0" promptText="Ask a question..." style="-fx-background-color: #424242; -fx-text-fill: white; -fx-background-radius: 8;">
          <font>
             <Font name="Ubuntu Light" size="34.0" />
          </font>
@@ -97,7 +103,7 @@
             <Font size="28.0" />
          </font>
       </Button>
-      <Label fx:id="askingQuestionPaneHeader" alignment="CENTER" layoutX="55.0" layoutY="20.0" prefHeight="88.0" prefWidth="535.0" style="-fx-text-fill: white;" text="Ask question" textAlignment="CENTER">
+      <Label fx:id="askingQuestionPaneHeader" alignment="CENTER" layoutX="55.0" layoutY="11.0" prefHeight="115.0" prefWidth="535.0" style="-fx-text-fill: white;" text="Ask question" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Ubuntu Light" size="24.0" />
          </font>

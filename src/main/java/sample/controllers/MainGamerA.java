@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import sample.GameManager;
 import sample.ScreenManager;
 
@@ -27,6 +28,10 @@ public class MainGamerA {
     public AnchorPane winPane;
     @FXML
     public AnchorPane connectionErrorPane;
+    @FXML
+    public Text word;
+    @FXML
+    public Text name;
 
     private ScreenManager screenManager = new ScreenManager();
 
@@ -64,7 +69,12 @@ public class MainGamerA {
         GameManager.getInstance().setMainGamerA(this);
         hideAllPanes();
         questionLabel.setText("");
+        name.setText(GameManager.getInstance().getUser().getName());
         waitingPane.setVisible(true);
+    }
+
+    public void setWord(String currentWord) {
+        word.setText(currentWord);
     }
 
     public void exitToMainMenu(ActionEvent actionEvent) {
@@ -90,7 +100,7 @@ public class MainGamerA {
         connectionErrorPane.setVisible(false);
     }
 
-    public void loose(ActionEvent actionEvent) {
+    public void lose(ActionEvent actionEvent) {
         screenManager.setScreen("mainGamerB", actionEvent);
     }
 

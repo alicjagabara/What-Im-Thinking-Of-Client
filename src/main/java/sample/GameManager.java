@@ -1,7 +1,9 @@
 package sample;
 
+import com.google.common.util.concurrent.Monitor;
 import javafx.application.Platform;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import sample.controllers.MainGamerA;
 import sample.controllers.MainGamerB;
@@ -12,13 +14,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@NoArgsConstructor
 public class GameManager {
 
     private static GameManager instance;
 
-    @Getter
-    @Setter
-    private User user;
+    @Getter @Setter private User user;
 
     @Getter
     private MessagesRetriever messagesRetriever;
@@ -32,8 +33,12 @@ public class GameManager {
     @Setter
     private MainGamerB mainGamerB;
 
+    @Getter
+    private String currentWord;
 
-    private GameManager(){
+    private Monitor mutex;
+
+    public void startGame() {
         this.messagesRetriever = new MessagesRetriever(new ConnectionHandler());
         new Thread(this.messagesRetriever).start();
     }
@@ -44,12 +49,12 @@ public class GameManager {
         addQuestion(msg[0], msg[1]);
     }
 
-    public void addQuestion(String question, String answer){
+    public void addQuestion(String question, String answer) {
         questionAnswerMap.put(question, answer);
         Platform.runLater(() -> mainGamerB.initShowingQuestionPane(question, answer));
     }
 
-    public static synchronized GameManager getInstance(){
+    public static synchronized GameManager getInstance() {
         if (instance == null) instance = new GameManager();
         return instance;
     }
@@ -72,16 +77,17 @@ public class GameManager {
     }
 
     public void disconnectGame() {
-        if(user.getClass() == UserA.class){
+        if (user instanceof UserA) {
             mainGamerA.connectionError();
-        }
-        else{
+        } else {
             mainGamerB.connectionError();
         }
     }
 
 
     public void saveWord(String word) throws IOException {
+        this.currentWord = word;
+        mainGamerA.setWord(word);
         messagesRetriever.sendMessage(SendMessageTypes.NEW_WORD, word);
     }
 
@@ -97,7 +103,7 @@ public class GameManager {
         Platform.runLater(() -> mainGamerA.askForAnswer(question));
     }
 
-    public void askQuestion(){
+    public void askQuestion() {
         Platform.runLater(() -> mainGamerB.initAskingQuestionPaneWhenThereIsUserRound());
     }
 
@@ -121,18 +127,17 @@ public class GameManager {
         mainGamerB.initLoosePane();
     }
 
-    public void gamerALoose() {
+    public void gamerALose() {
         this.questionAnswerMap.clear();
         this.user = new UserB(this.user.getName());
         mainGamerA.initLoosePane();
     }
 
     public void userALeft(ReceivedMessageType userType) {
-        if(userType == ReceivedMessageType.INVENTOR){
+        if (userType == ReceivedMessageType.INVENTOR) {
             this.user = new UserA(this.user.getName());
             mainGamerB.initWinPane();
-        }
-        else{
+        } else {
             this.user = new UserB(this.user.getName());
             mainGamerB.initLoosePane();
         }
@@ -149,5 +154,13 @@ public class GameManager {
     }
 
 
+    public void waitForFirstUser(Monitor mutex) {
+        this.mutex = mutex;
+        if (this.user == null) this.mutex.enter();
+    }
 
+    public void setFirstUser(User user) {
+        this.user = user;
+        mutex.leave();
+    }
 }

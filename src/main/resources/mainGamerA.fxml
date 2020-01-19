@@ -9,17 +9,40 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #212121;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.MainGamerA">
-   <Pane fx:id="waitingPane" layoutX="-1.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #212121;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <Text fill="#e5e5e5" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wait for Question..." textAlignment="CENTER" wrappingWidth="600.0">
+   <Pane fx:id="waitingPane" layoutX="-1.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #212121;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Text fill="#e5e5e5" layoutX="76.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wait for Question" textAlignment="CENTER" wrappingWidth="448.0">
          <font>
             <Font name="Ubuntu Light" size="54.0" />
          </font>
       </Text>
-   </Pane>
-   <Pane fx:id="questionPane" layoutX="-1.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #212121;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <Label fx:id="questionLabel" layoutX="50.0" layoutY="110.0" prefHeight="78.0" prefWidth="500.0" style="-fx-text-fill: white;" text="QUESTION">
+      <Text fx:id="word" fill="WHITE" layoutX="115.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Word" textAlignment="CENTER" wrappingWidth="372.0">
          <font>
-            <Font name="Ubuntu Light" size="26.0" />
+            <Font name="Ubuntu" size="36.0" />
+         </font>
+      </Text>
+      <Text fx:id="name" fill="WHITE" layoutX="71.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" textAlignment="CENTER" wrappingWidth="459.0">
+         <font>
+            <Font name="Ubuntu" size="40.0" />
+         </font>
+      </Text>
+      <Separator layoutX="201.0" layoutY="154.0" prefWidth="200.0" />
+      <Separator layoutX="200.0" layoutY="218.0" prefWidth="200.0" />
+      <Text fill="WHITE" layoutX="201.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NAME">
+         <font>
+            <Font name="Ubuntu Bold" size="12.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="200.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WORD">
+         <font>
+            <Font name="Ubuntu Bold" size="12.0" />
+         </font>
+      </Text>
+      <Separator layoutX="201.0" layoutY="92.0" prefWidth="200.0" />
+   </Pane>
+   <Pane fx:id="questionPane" layoutX="-1.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #212121;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label fx:id="questionLabel" alignment="TOP_LEFT" layoutX="50.0" layoutY="110.0" prefHeight="155.0" prefWidth="500.0" style="-fx-text-fill: white;" text="QUESTION" wrapText="true">
+         <font>
+            <Font name="Ubuntu Light" size="30.0" />
          </font>
       </Label>
       <Text fill="#f8f4f4" layoutX="196.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question" textAlignment="CENTER" wrappingWidth="230.0">
@@ -28,17 +51,17 @@
          </font>
       </Text>
       <Separator layoutX="211.0" layoutY="90.0" prefWidth="200.0" />
-      <Button fx:id="yes" layoutX="34.0" layoutY="265.0" mnemonicParsing="false" onAction="#sendYes" prefHeight="60.0" prefWidth="140.0" style="-fx-background-color: #424242; -fx-background-radius: 8;" text="YES" textFill="#d0cece">
+      <Button fx:id="yes" layoutX="35.0" layoutY="295.0" mnemonicParsing="false" onAction="#sendYes" prefHeight="60.0" prefWidth="140.0" style="-fx-background-color: #424242; -fx-background-radius: 8;" text="YES" textFill="#d0cece">
          <font>
             <Font name="Ubuntu Light" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="no" layoutX="188.0" layoutY="265.0" mnemonicParsing="false" onAction="#sendNo" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: #424242; -fx-background-radius: 8;" text="NO" textFill="#d0cece">
+      <Button fx:id="no" layoutX="187.0" layoutY="295.0" mnemonicParsing="false" onAction="#sendNo" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: #424242; -fx-background-radius: 8;" text="NO" textFill="#d0cece">
          <font>
             <Font name="Ubuntu Light" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="dontknow" layoutX="363.0" layoutY="265.0" mnemonicParsing="false" onAction="#sendDontKnow" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #424242; -fx-background-radius: 8;" text="I DON'T KNOW" textFill="#d0cece">
+      <Button fx:id="dontknow" layoutX="361.0" layoutY="295.0" mnemonicParsing="false" onAction="#sendDontKnow" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #424242; -fx-background-radius: 8;" text="I DON'T KNOW" textFill="#d0cece">
          <font>
             <Font name="Ubuntu Light" size="24.0" />
          </font>
@@ -56,12 +79,12 @@
                <Font name="Ubuntu Light" size="40.0" />
             </font>
          </Text>
-         <Button layoutX="549.0" layoutY="-4.0" mnemonicParsing="false" onAction="#loose" prefHeight="64.0" prefWidth="55.0" style="-fx-background-color: #212121;" text="X" textFill="WHITE" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <Button layoutX="549.0" layoutY="-4.0" mnemonicParsing="false" onAction="#lose" prefHeight="64.0" prefWidth="55.0" style="-fx-background-color: #212121;" text="X" textFill="WHITE" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <font>
                <Font size="28.0" />
             </font>
          </Button>
-         <Button contentDisplay="CENTER" layoutX="185.0" layoutY="315.0" mnemonicParsing="false" onAction="#loose" prefHeight="60.0" prefWidth="230.0" style="-fx-background-color: #424242; -fx-background-radius: 8;" text="OK" textAlignment="CENTER" textFill="#d0cece">
+         <Button contentDisplay="CENTER" layoutX="185.0" layoutY="315.0" mnemonicParsing="false" onAction="#lose" prefHeight="60.0" prefWidth="230.0" style="-fx-background-color: #424242; -fx-background-radius: 8;" text="OK" textAlignment="CENTER" textFill="#d0cece">
             <font>
                <Font name="Ubuntu Light" size="24.0" />
             </font>
