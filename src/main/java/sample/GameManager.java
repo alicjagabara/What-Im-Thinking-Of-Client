@@ -161,6 +161,6 @@ public class GameManager {
 
     public void setFirstUser(User user) {
         this.user = user;
-        mutex.leave();
+        if (mutex.isOccupied()) mutex.leave();
     }
 }
