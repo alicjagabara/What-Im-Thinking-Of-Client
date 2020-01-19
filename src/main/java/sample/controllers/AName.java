@@ -16,7 +16,7 @@ public class AName {
     private ScreenManager screenManager = new ScreenManager();
 
     public void exit(ActionEvent event) {
-        GameManager.getInstance().quitGame();
+        GameManager.getInstance().exitGame();
         screenManager.setScreen("welcome", event);
     }
 

@@ -16,7 +16,7 @@ public class InputWord {
     public TextField word;
 
     public void exit(ActionEvent event) {
-        GameManager.getInstance().quitGame();
+        GameManager.getInstance().exitGame();
         screenManager.setScreen("welcome", event);
     }
 
