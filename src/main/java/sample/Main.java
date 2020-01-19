@@ -8,6 +8,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.IOException;
+
 public class Main extends Application {
 
     private double x, y;
@@ -17,6 +19,7 @@ public class Main extends Application {
     }
 
     public void start(Stage stage) throws Exception {
+        loadConfiguration();
         Parent root = FXMLLoader.load(getClass().getResource("/welcome.fxml"));
         stage.setTitle("What I'm thinking of?");
         Scene scene = new Scene(root);
@@ -33,5 +36,9 @@ public class Main extends Application {
             stage.setX(mouseEvent.getScreenX() - x);
             stage.setY(mouseEvent.getScreenY() - y);
         });
+    }
+
+    private void loadConfiguration() throws IOException {
+        Config.load();
     }
 }

@@ -16,9 +16,9 @@ import static java.lang.System.out;
 
 public class ConnectionHandler {
 
-    private static final String SERVER_ADDRESS = "127.0.0.1";
-    private static final int SERVER_PORT = 8081;
-    private static final int TIMEOUT = 600;
+    private static final String SERVER_ADDRESS = Config.getProperty("server.address");
+    private static final int SERVER_PORT = Config.getInteger("server.port");
+    private static final int TIMEOUT = Config.getInteger("server.timeout");
 
     @Getter
     private Socket socket;
