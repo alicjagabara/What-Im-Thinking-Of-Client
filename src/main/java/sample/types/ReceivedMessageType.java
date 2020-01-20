@@ -11,7 +11,8 @@ public enum ReceivedMessageType {
     QA("QA||"),
     QUESTION("Q||"),
     ASK_QUESTION("AQ||"),
-    GAME_BEGAN("GB||"),
+    GAME_BEGAN("BG||"),
+    WAIT("WAIT||"),
     WRONG_GUESS("WG||"),
     QA_END("QAE||"),
     UNKNOWN("UNKNOWN");

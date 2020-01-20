@@ -84,6 +84,9 @@ public class MainGamerB {
     @FXML
     public AnchorPane connectionErrorPane;
 
+    @FXML
+    public AnchorPane waitPane;
+
 
     private ScreenManager screenManager = new ScreenManager();
 
@@ -112,7 +115,7 @@ public class MainGamerB {
     }
 
     public void exitToMainMenu(ActionEvent actionEvent) {
-        GameManager.getInstance().quitGame();
+        GameManager.getInstance().exitGame();
         screenManager.setScreen("welcome", actionEvent);
     }
 
@@ -213,6 +216,7 @@ public class MainGamerB {
         this.winPane.setVisible(false);
         this.loosePane.setVisible(false);
         this.connectionErrorPane.setVisible(false);
+        this.waitPane.setVisible(false);
     }
 
     public void initialize() {
@@ -222,9 +226,18 @@ public class MainGamerB {
         initPreviousQuestionsPane(GameManager.getInstance().getQuestionAnswerMap());
         initAskingQuestionPane();
         initShowingQuestionPane("", "");
+        initWaitPane();
         initMainPane(GameManager.getInstance().getUser().getLife().toString(), GameManager.getInstance()
                 .getUser()
                 .getName());
+        if(GameManager.getInstance().isWaiting()){
+            initWaitPane();
+        }
+    }
+
+    public void initWaitPane() {
+        setAllInvisible();
+        this.waitPane.setVisible(true);
     }
 
     public void initWinPane() {

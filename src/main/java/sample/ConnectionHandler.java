@@ -57,6 +57,7 @@ public class ConnectionHandler {
 
     public String receiveMessage() throws IOException {
         String line = reader.readLine();
+        System.out.println(String.format("Got new line!: %s", line));
         if (line == null) throw new IOException();
         out.println(String.format("Received %d bytes: %s", line.length(), line));
         return line;

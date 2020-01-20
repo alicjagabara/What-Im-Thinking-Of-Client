@@ -38,6 +38,9 @@ public class GameManager {
 
     private Monitor mutex;
 
+    @Getter
+    private boolean waiting = false;
+
     public void startGame() {
         this.messagesRetriever = new MessagesRetriever(new ConnectionHandler());
         new Thread(this.messagesRetriever).start();
@@ -162,5 +165,22 @@ public class GameManager {
     public void setFirstUser(User user) {
         this.user = user;
         if (mutex.isOccupied()) mutex.leave();
+    }
+
+    public void gameBegan() {
+        if(mainGamerB != null) {
+            mainGamerB.initMainPane(this.user.getLife().toString(), this.user.getName());
+        }
+        this.waiting = false;
+    }
+
+    public void waitForGame() {
+        if(mainGamerB != null){
+            mainGamerB.initWaitPane();
+        }
+        else{
+            this.waiting = true;
+        }
+
     }
 }

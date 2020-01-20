@@ -15,8 +15,6 @@ import static com.google.common.util.concurrent.Monitor.Guard;
 
 public class Welcome {
 
-    private static long TIMEOUT = 1500;
-
     private ScreenManager screenManager = new ScreenManager();
 
     private Monitor mutex = new Monitor();

@@ -19,8 +19,6 @@ public class MainGamerA {
     @FXML
     public Pane questionPane;
     @FXML
-    public TextField answer;
-    @FXML
     public Label questionLabel;
     @FXML
     public AnchorPane loosePane;
@@ -78,7 +76,7 @@ public class MainGamerA {
     }
 
     public void exitToMainMenu(ActionEvent actionEvent) {
-        GameManager.getInstance().quitGame();
+        GameManager.getInstance().exitGame();
         screenManager.setScreen("welcome", actionEvent);
     }
 

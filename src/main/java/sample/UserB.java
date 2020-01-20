@@ -38,6 +38,12 @@ public class UserB extends User {
             case GUESSER:
                 GameManager.getInstance().userALeft(GUESSER);
                 break;
+            case GAME_BEGAN:
+                GameManager.getInstance().gameBegan();
+                break;
+            case WAIT:
+                GameManager.getInstance().waitForGame();
+                break;
             case UNKNOWN:
                 break;
         }
